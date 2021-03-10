@@ -25,8 +25,8 @@ module.exports = {
           className: "navbar__button",
         },
         {
-          href: "https://tor.us/contact-us.html",
-          label: "Contact us",
+          to: "/integration-builder-v2",
+          label: "Integration Builder",
           position: "right",
         },
       ],
