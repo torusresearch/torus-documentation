@@ -1,4 +1,7 @@
 :root {
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-height: 81px;
+  --ifm-navbar-padding-horizontal: 38px;
   --ifm-color-primary: #0364ff;
   --ifm-color-primary-dark: #0059e8;
   --ifm-color-primary-darker: #0054db;
@@ -6,6 +9,20 @@
   --ifm-color-primary-light: #1d74ff;
   --ifm-color-primary-lighter: #2a7cff;
   --ifm-color-primary-lightest: #5094ff;
+}
+
+.navbar__brand {
+  height: 20px;
+}
+
+.navbar__logo {
+  border-right: 2px solid #bebebe;
+  padding-right: 8px;
+}
+
+.navbar__title {
+  font-weight: normal;
+  font-size: 16px;
 }
 
 .docusaurus-highlight-code-line {
