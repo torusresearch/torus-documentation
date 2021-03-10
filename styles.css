@@ -16,6 +16,10 @@
   --ifm-color-primary-lightest: #5094ff;
 }
 
+.container {
+  background: #f9f9fb;
+}
+
 .navbar__brand {
   height: 20px;
 }
