@@ -3,17 +3,24 @@ import Link from "@docusaurus/Link";
 import classNames from "classnames";
 import styles from "./styles.module.css";
 
-const Guide = ({ title, description, to }) => (
+const Guide = ({ title, description, to, color = "1" }) => (
   <div className={classNames("card", styles.card)}>
-    <div className="card__header">
+    <div className={classNames("card__header", styles.header)}>
       <h3>{title}</h3>
     </div>
-    <div className="card__body">
+    <div className={classNames("card__body", styles.body)}>
       <p>{description}</p>
     </div>
     <div className="card__footer">
-      <Link className="button button--secondary button--block" to={to}>
-        Get started
+      <Link
+        className={classNames(
+          "button",
+          styles.button,
+          styles[`button-color-${color}`]
+        )}
+        to={to}
+      >
+        Get Started
       </Link>
     </div>
   </div>

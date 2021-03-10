@@ -1,3 +1,43 @@
 .card {
+  background: #ffffff;
+  box-shadow: 0px 14px 28px rgba(92, 108, 127, 0.06);
+  border-radius: 6px;
+  padding: 30px 40px;
+
   margin-bottom: 2rem;
+}
+
+.header h3 {
+  font-family: Poppins;
+  font-weight: 500;
+  color: #0f1222;
+  font-size: 20px;
+}
+
+.body {
+  padding-top: 2px;
+  color: #676767;
+  font-size: 15px;
+  margin-bottom: 56px;
+}
+
+.button {
+  color: white;
+  padding: 11px 48px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  float: right;
+}
+
+.button-color-1 {
+  background: linear-gradient(93.32deg, #0364ff 3.79%, #0016de 100%);
+}
+
+.button-color-2 {
+  background: linear-gradient(93.32deg, #0364ff 3.79%, #b114fb 100%);
+}
+
+.button-color-3 {
+  background: linear-gradient(93.32deg, #0364ff 3.79%, #1ac7fe 100%);
 }
