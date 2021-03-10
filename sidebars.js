@@ -1,6 +1,6 @@
 module.exports = {
   docs: {
-    Introduction: ["torus", "getting-started"],
+    Introduction: ["torus"],
     "Direct Auth": [
       "direct-auth/quick-start",
       "direct-auth/what-is-directauth",
