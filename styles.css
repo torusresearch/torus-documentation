@@ -2,6 +2,8 @@
   --ifm-navbar-background-color: #ffffff;
   --ifm-navbar-height: 81px;
   --ifm-navbar-padding-horizontal: 38px;
+  --ifm-navbar-item-padding-vertical: 0px;
+  --ifm-navbar-item-padding-horizontal: 0px;
   --ifm-color-primary: #0364ff;
   --ifm-color-primary-dark: #0059e8;
   --ifm-color-primary-darker: #0054db;
@@ -23,6 +25,38 @@
 .navbar__title {
   font-weight: normal;
   font-size: 16px;
+}
+
+.navbar__item {
+  height: 42px;
+  width: 170px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__link {
+  color: #676767;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.navbar__link:hover {
+  color: black;
+}
+
+.navbar__button {
+  color: #0364ff;
+  background-color: white;
+  border: 2px solid #0364ff;
+  border-radius: 10px;
+  transition: background-color var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+}
+
+.navbar__button:hover {
+  color: white;
+  background-color: #0364ff;
 }
 
 .docusaurus-highlight-code-line {

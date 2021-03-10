@@ -19,13 +19,14 @@ module.exports = {
       },
       items: [
         {
-          to: "integration-builder-v2",
-          label: "Integration Builder",
+          href: "https://register.directauth.io",
+          label: "Dashboard",
           position: "right",
+          className: "navbar__button",
         },
         {
-          href: "https://dashboard.tor.us", // TODO: replace with actual dashboard link
-          label: "Dashboard",
+          href: "https://tor.us/contact-us.html",
+          label: "Contact us",
           position: "right",
         },
       ],
