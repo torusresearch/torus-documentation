@@ -59,6 +59,16 @@
   background-color: var(--ifm-color-primary);
 }
 
+.menu {
+  background-color: white;
+  padding: 24px !important;
+  scrollbar-width: none;
+}
+
+.menu::-webkit-scrollbar {
+  display: none;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
 }
