@@ -150,6 +150,10 @@ module.exports = {
           ],
         },
       ],
+      logo: {
+        alt: "Torus Labs",
+        src: "img/logo.svg",
+      },
       copyright: `© ${new Date().getFullYear()} Torus Labs Private Limited`,
     },
     colorMode: {
