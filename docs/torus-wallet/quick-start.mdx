@@ -2,8 +2,8 @@
 title: Quick Start
 ---
 
-The iFrame wallet allows any application to seamlessly support their user's
-interactions with Ethereum (and similar EVM chains). OAuth logins,
+An `iframe` wallet allows any application to seamlessly support their user's
+interactions with Ethereum (and similar EVM chains): OAuth logins,
 fiat-to-crypto and much more listed in features.
 
 ---
@@ -53,8 +53,8 @@ const web3 = new Web3(torus.provider);
 
 ### Script Tag
 
-The code snippet below sets Torus Wallet as the default login method for the
-DApp, paste the following script to the &lt;body&gt; of index.html.
+The code snippet below sets Torus Wallet as the default login method for a DApp,
+paste one of the following scripts to the `body` of your `index.html`.
 
 ```markup
 <script src="https://cdn.jsdelivr.net/npm/@toruslabs/torus-embed"></script>
@@ -64,12 +64,12 @@ DApp, paste the following script to the &lt;body&gt; of index.html.
 <script src="https://unpkg.com/@toruslabs/torus-embed"></script>
 ```
 
-The script tag creates a `window.torus` object. You can initialize it and use it
-as above.
+The script tag creates a `window.torus` object. You can initialize and use it as
+[described above](#basic).
 
 ### IPFS
 
-You can also choose in load the embed via IPFS
+You can also choose in load the embed via IPFS:
 
 ```markup
 <script src="https://ipfs.io/ipfs/QmVrWpAivFzEN6GGerdURNXfssr5YpHjTtZopHHGQ6AHmU"></script>
