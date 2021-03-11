@@ -1,4 +1,12 @@
 .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  color: #676767;
   background: white;
   height: 258px;
   background: #ffffff;
