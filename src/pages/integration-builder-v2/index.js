@@ -110,6 +110,8 @@ export default function IntegrationBuilderPage() {
 
   const onClickProduct = (index) => {
     if (index === selectedProduct.index) return;
+    setHightlightRange();
+    setSelectedTab(0);
     setSelectedProduct({
       index,
       step: -1,
@@ -119,6 +121,8 @@ export default function IntegrationBuilderPage() {
 
   const onChooseOption = (option, choice) => {
     if (selectedProduct.options[option] === choice) return;
+    setHightlightRange();
+    setSelectedTab(0);
     setSelectedProduct({
       ...selectedProduct,
       step: -1,
