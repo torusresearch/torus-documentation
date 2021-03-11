@@ -9,6 +9,7 @@ module.exports = {
         "torus-wallet/changelog",
         {
           Features: [
+            "torus-wallet/features/list-of-features",
             "torus-wallet/features/accountrecovery",
             "torus-wallet/features/purchasecryptocurrency",
             "torus-wallet/features/erc721",
