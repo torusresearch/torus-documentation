@@ -84,6 +84,11 @@ module.exports = {
     },
     {
       type: "category",
+      label: "OpenLogin",
+      items: ["open-login/quick-start"],
+    },
+    {
+      type: "category",
       label: "How Torus works",
       items: [
         "how-torus-works/system-architecture",

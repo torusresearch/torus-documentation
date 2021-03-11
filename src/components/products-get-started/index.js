@@ -31,7 +31,7 @@ export default function ProductsGetStarted() {
         <p>A privacy-focused login.</p>
         <Link
           className={classNames(styles.button, styles.button3)}
-          to="/direct-auth/quick-start"
+          to="/open-login/quick-start"
         >
           Get Started
         </Link>
