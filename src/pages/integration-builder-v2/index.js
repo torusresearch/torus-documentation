@@ -92,12 +92,19 @@ function getIntegration(product, options) {
   };
 }
 
+function getSelectedProductFromURL() {
+  const url = new URL(window.location.href);
+  const product = url.searchParams.get("product");
+  const index = products.findIndex((item) => item.name === product);
+  if (index === -1)
+    return { index: 0, step: -1, options: getDefaultOptions(products[0]) };
+  return { index, step: -1, options: getDefaultOptions(products[index]) };
+}
+
 export default function IntegrationBuilderPage() {
-  const [selectedProduct, setSelectedProduct] = useState({
-    index: 0,
-    step: -1,
-    options: getDefaultOptions(products[0]),
-  });
+  const [selectedProduct, setSelectedProduct] = useState(
+    getSelectedProductFromURL()
+  );
 
   const integration = getIntegration(
     products[selectedProduct.index].name,
