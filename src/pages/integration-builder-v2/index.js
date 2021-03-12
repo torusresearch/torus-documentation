@@ -89,12 +89,12 @@ export default function IntegrationBuilderPage() {
   );
 
   const [selectedTab, setSelectedTab] = useState(0);
-  const [hightlightRange, setHightlightRange] = useState();
+  const [highlightRange, setHighlightRange] = useState();
   const selectedSourceFile = integration.sourceFiles[selectedTab];
 
   const onClickProduct = (index) => {
     if (index === selectedProduct.index) return;
-    setHightlightRange();
+    setHighlightRange();
     setSelectedTab(0);
     setSelectedProduct({
       index,
@@ -105,7 +105,7 @@ export default function IntegrationBuilderPage() {
 
   const onChooseOption = (option, choice) => {
     if (selectedProduct.options[option] === choice) return;
-    setHightlightRange();
+    setHighlightRange();
     setSelectedTab(0);
     setSelectedProduct({
       ...selectedProduct,
@@ -130,11 +130,11 @@ export default function IntegrationBuilderPage() {
       (it) => it.name === stepIntegration.pointer[0]
     );
     setSelectedTab(tab);
-    setHightlightRange(stepIntegration.pointer[1]);
+    setHighlightRange(stepIntegration.pointer[1]);
   };
 
   const onClickTab = (index) => {
-    setHightlightRange();
+    setHighlightRange();
     setSelectedTab(index);
   };
 
@@ -220,7 +220,7 @@ export default function IntegrationBuilderPage() {
                 <CodeView
                   code={selectedSourceFile.code}
                   language={selectedSourceFile.language}
-                  hightlight={hightlightRange}
+                  highlight={highlightRange}
                 />
               </div>
             </div>

@@ -5,8 +5,8 @@ import theme from "prism-react-renderer/themes/palenight";
 import parseRange from "parse-numeric-range";
 import styles from "./styles.module.css";
 
-export default function CodeView({ code, language, hightlight }) {
-  const hightlightLines = hightlight ? parseRange(hightlight) : [];
+export default function CodeView({ code, language, highlight }) {
+  const highlightLines = highlight ? parseRange(highlight) : [];
 
   return (
     <Highlight {...defaultProps} theme={theme} code={code} language={language}>
@@ -14,7 +14,7 @@ export default function CodeView({ code, language, hightlight }) {
         <pre className={classNames(styles.pre, className)} style={style}>
           {tokens.map((line, i) => {
             const { className, ...lineProps } = getLineProps({ line, key: i });
-            const isHightlighted = hightlightLines.includes(i + 1);
+            const isHightlighted = highlightLines.includes(i + 1);
 
             return (
               <div
