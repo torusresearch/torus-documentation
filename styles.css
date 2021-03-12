@@ -55,6 +55,7 @@ body {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 }
 
 .navbar__link {
@@ -71,7 +72,6 @@ body {
   color: var(--ifm-color-primary);
   background-color: white;
   border: 2px solid var(--ifm-color-primary);
-  border-radius: 10px;
   transition: background-color var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
 }
@@ -89,6 +89,12 @@ body {
 
 .menu::-webkit-scrollbar {
   display: none;
+}
+
+@media only screen and (max-width: 996px) {
+  .navbar__item {
+    display: none;
+  }
 }
 
 .pagination-nav__link {
