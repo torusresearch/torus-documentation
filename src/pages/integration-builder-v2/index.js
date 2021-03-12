@@ -7,8 +7,6 @@ import styles from "./styles.module.css";
 
 import DirectAuthIntegrationBuilder from "../../libs/integration-builder-v2/direct-auth";
 import TorusWalletIntegrationBuilder from "../../libs/integration-builder-v2/torus-wallet";
-import * as DirectAuthSteps from "../../libs/integration-builder-v2/direct-auth/steps";
-import * as DirectAuthFiles from "../../libs/integration-builder-v2/direct-auth/srcfiles";
 
 import Prism from "prism-react-renderer/prism";
 (typeof global !== "undefined" ? global : window).Prism = Prism;
@@ -61,35 +59,7 @@ function getDefaultOptions(product) {
 function getIntegration(product, options) {
   if (product === "DirectAuth") return DirectAuthIntegrationBuilder(options);
   if (product === "Torus Wallet") return TorusWalletIntegrationBuilder(options);
-  return {
-    steps: [
-      {
-        pointer: ["App.js", "3"],
-        component: <DirectAuthSteps.InstallWebSDK />,
-      },
-      {
-        pointer: ["App.js", "137-141"],
-        component: <DirectAuthSteps.InstantiateSDKInstance />,
-      },
-      {
-        pointer: ["sw.js"],
-        component: <DirectAuthSteps.ServeServiceWorker />,
-      },
-      {
-        pointer: ["redirect.html"],
-        component: <DirectAuthSteps.ServeRedirectPage />,
-      },
-      {
-        pointer: ["App.js", "158-163"],
-        component: <DirectAuthSteps.TriggerLogin />,
-      },
-    ],
-    sourceFiles: [
-      DirectAuthFiles.AppJS,
-      DirectAuthFiles.SwJS,
-      DirectAuthFiles.RedirectHTML,
-    ],
-  };
+  throw new Error("Product is not supported.");
 }
 
 function getSelectedProductFromURL() {
