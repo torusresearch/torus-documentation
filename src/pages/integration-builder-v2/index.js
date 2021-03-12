@@ -98,7 +98,14 @@ function getSelectedProductFromURL() {
   const index = products.findIndex((item) => item.name === product);
   if (index === -1)
     return { index: 0, step: -1, options: getDefaultOptions(products[0]) };
-  return { index, step: -1, options: getDefaultOptions(products[index]) };
+
+  const options = getDefaultOptions(products[index]);
+  for (const opt of Object.keys(products[index].options)) {
+    const value = url.searchParams.get(opt);
+    if (products[index].options[opt].choices.includes(value))
+      options[opt] = value;
+  }
+  return { index, options, step: -1 };
 }
 
 export default function IntegrationBuilderPage() {
