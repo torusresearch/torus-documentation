@@ -1,7 +1,10 @@
 name: master
 
-on: push
-
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
 env:
   NODE_VERSION: 14
   FORCE_COLOR: 3
