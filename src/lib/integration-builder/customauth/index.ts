@@ -216,15 +216,15 @@ const directAuthIntegrationBuilder: IntegrationBuilder = {
         },
         {
           ...STEPS.setupSwiftUrlSchema,
-          pointer: { filename: "ios/SceneDelegate.swift", range: "18-23" },
+          pointer: { filename: "ios/SceneDelegate.swift", range: "19-24" },
         },
         {
           ...STEPS.setupSwiftUniversalLinks,
-          pointer: { filename: "ios/SceneDelegate.swift", range: "9-15" },
+          pointer: { filename: "ios/SceneDelegate.swift", range: "10-16" },
         },
         {
           ...STEPS.triggerSwiftLogin,
-          pointer: { filename: "ios/ContentView.swift", range: "21-32" },
+          pointer: { filename: "ios/ContentView.swift", range: "21-33" },
         }
       );
     }
