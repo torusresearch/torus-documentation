@@ -147,6 +147,89 @@ privateKey as a response to triggerLogin function.
   const loginResult = await torusdirectsdk.getRedirectResult();
 ```
 
+
+## Using Private Key with web3 provider:
+
+- You can use this private key to create a EIP1993 compatible wallet provider which can we used to directly invoke blockchain functions using rpc calls or using the provider with web3 js library.
+
+> Prerequisites:
+```
+npm i --save @web3auth/ethereum-provider
+```
+
+- After installing above package you can generate a provider from private key as given below:-
+
+
+```ts
+const setupProvider = async (params: {
+  privKey: string;
+  chainConfig: Omit<CustomChainConfig, "chainNamespace">;
+}): Promise<SafeEventEmitterProvider> => {
+  const providerFactory = new EthereumPrivateKeyProvider({ config: { chainConfig: params.chainConfig } });
+  await providerFactory.init();
+  return new Promise((resolve, reject) => {
+    // check if provider is ready
+    if (providerFactory.state._initialized) {
+      const provider = providerFactory.setupProvider(params.privKey);
+      resolve(provider);
+      return;
+    }
+
+    // wait for provider to get ready
+    providerFactory.once(PROVIDER_EVENTS.INITIALIZED, async () => {
+      const provider = providerFactory.setupProvider(params.privKey);
+      resolve(provider);
+    });
+    providerFactory.on(PROVIDER_EVENTS.ERRORED, (error) => {
+      reject(error);
+    });
+  });
+};
+
+```
+
+> Sample Chain Config
+
+```json=
+
+  chainConfig: {
+    rpcTarget: "https://polygon-rpc.com", // your rpc node endpoint of any evm compatible chain
+    chainId: "0x89", // Note: chainId should be in hex format
+    networkName: "Polygon Mainnet",
+    ticker: "matic",
+    tickerName: "matic",
+  }
+```
+
+- Once you have a provider you can inject that provider in to web3 library and invoke any function using web3 like sending transactions, signing messages etc.
+
+For ex:
+
+```ts
+# Signing a message
+const signEthMessage = async (provider: SafeEventEmitterProvider): Promise<any> => {
+  const web3 = new Web3(provider as any);
+  const accounts = await (web3.currentProvider as any)?.sendAsync({
+    method: "eth_accounts",
+    params: [],
+  });
+  // hex message
+  const message = "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad";
+  const jrpcResult = await (web3.currentProvider as any)?.sendAsync({
+    method: "eth_sign",
+    params: [accounts[0], message],
+    from: accounts[0],
+  });
+  return jrpcResult;
+};
+
+# Fetching latest block from chain
+const fetchLatestBlock = async (provider: SafeEventEmitterProvider): Promise<any> => {
+  const web3 = new Web3(provider as any);
+  const block = await web3.eth.getBlock("latest");
+  return block;
+};
+```
 ## Conclusion
 
 You can use the above private key which is returned as response of `getRedirectResult` in your web3 SDK.
