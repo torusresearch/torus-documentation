@@ -150,7 +150,7 @@ privateKey as a response to triggerLogin function.
 
 ## Using Private Key with web3 provider:
 
-- You can use this private key to create a EIP1993 compatible wallet provider which can we used to directly invoke blockchain functions using rpc calls or using the provider with web3 js library.
+- You can use this private key to use with `@web3auth/ethereum-provider` which is an EIP1993 compatible wallet provider and this provider can we used to directly invoke blockchain functions using rpc calls or using the provider with web3 js library.
 
 > Prerequisites:
 ```
@@ -161,30 +161,19 @@ npm i --save @web3auth/ethereum-provider
 
 
 ```ts
-const setupProvider = async (params: {
-  privKey: string;
-  chainConfig: Omit<CustomChainConfig, "chainNamespace">;
-}): Promise<SafeEventEmitterProvider> => {
-  const providerFactory = new EthereumPrivateKeyProvider({ config: { chainConfig: params.chainConfig } });
-  await providerFactory.init();
-  return new Promise((resolve, reject) => {
-    // check if provider is ready
-    if (providerFactory.state._initialized) {
-      const provider = providerFactory.setupProvider(params.privKey);
-      resolve(provider);
-      return;
-    }
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import type { SafeEventEmitterProvider } from "@web3auth/base";
 
-    // wait for provider to get ready
-    providerFactory.once(PROVIDER_EVENTS.INITIALIZED, async () => {
-      const provider = providerFactory.setupProvider(params.privKey);
-      resolve(provider);
-    });
-    providerFactory.on(PROVIDER_EVENTS.ERRORED, (error) => {
-      reject(error);
-    });
-  });
-};
+const provider = await EthereumPrivateKeyProvider.getProviderInstance({
+  chainConfig: {
+    rpcTarget: "https://polygon-rpc.com",
+    chainId: "0x89", // hex chain id
+    networkName: "matic",
+    ticker: "matic",
+    tickerName: "matic",
+  },
+  privKey: "4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318",
+});
 
 ```
 
@@ -206,21 +195,16 @@ const setupProvider = async (params: {
 For ex:
 
 ```ts
+import type { SafeEventEmitterProvider } from "@web3auth/base";
+
 # Signing a message
-const signEthMessage = async (provider: SafeEventEmitterProvider): Promise<any> => {
+const signEthMessage = async (provider: SafeEventEmitterProvider): Promise<string> => {
   const web3 = new Web3(provider as any);
-  const accounts = await (web3.currentProvider as any)?.sendAsync({
-    method: "eth_accounts",
-    params: [],
-  });
+  const accounts = await web3.eth.getAccounts();
   // hex message
   const message = "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad";
-  const jrpcResult = await (web3.currentProvider as any)?.sendAsync({
-    method: "eth_sign",
-    params: [accounts[0], message],
-    from: accounts[0],
-  });
-  return jrpcResult;
+  const signature = await web3.eth.sign(message, accounts[0]);
+  return signature;
 };
 
 # Fetching latest block from chain
