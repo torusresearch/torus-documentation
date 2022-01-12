@@ -11,8 +11,8 @@
 /* Quick Start Card */
 .cardQuickStart {
   background-image: url("/images/web3auth-right.png"), url("/images/web3auth-bg-dots.png"),
-    linear-gradient(271.78deg, rgba(0, 0, 0, 0.8) 1.77%, rgba(0, 0, 0, 0) 98.95%),
-    linear-gradient(181.35deg, rgba(0, 0, 0, 0.27) 3.43%, #000746 97.5%),
+    /* linear-gradient(271.78deg, rgba(0, 0, 0, 0.8) 1.77%, rgba(0, 0, 0, 0) 98.95%), */
+    /* linear-gradient(181.35deg, rgba(0, 0, 0, 0.27) 3.43%, #000746 97.5%), */
     linear-gradient(138.93deg, #0364ff 14.81%, #1ac7fe 85.98%);
   background-position: right, left -280px top -150px, center center, center, center;
   background-size: auto, auto, 100%, 100%, 100%;
@@ -56,7 +56,7 @@
 .ctaBtn.ctaBtnWhite {
   background: #ffffff;
   color: #0364ff;
-  margin-left: 16px;
+  /* margin-left: 16px; */
 }
 
 .ctaBtn:hover {

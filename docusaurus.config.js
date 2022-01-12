@@ -55,12 +55,7 @@ module.exports = {
           to: "/guides",
           position: "left",
           className: "navbar__section-link",
-        },
-        {
-          label: "Contact us",
-          href: contactUrl,
-          position: "right",
-        },
+        }
       ],
     },
     footer: {
