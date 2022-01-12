@@ -1,0 +1,87 @@
+.container {
+  display: block;
+}
+.content {
+  max-width: 472px;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+/* Quick Start Card */
+.cardQuickStart {
+  background-image: url("/images/web3auth-right.png"), url("/images/web3auth-bg-dots.png"),
+    linear-gradient(271.78deg, rgba(0, 0, 0, 0.8) 1.77%, rgba(0, 0, 0, 0) 98.95%),
+    linear-gradient(181.35deg, rgba(0, 0, 0, 0.27) 3.43%, #000746 97.5%),
+    linear-gradient(138.93deg, #0364ff 14.81%, #1ac7fe 85.98%);
+  background-position: right, left -280px top -150px, center center, center, center;
+  background-size: auto, auto, 100%, 100%, 100%;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  height: 326px;
+  padding: 45px 55px;
+}
+
+.headline {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.5em;
+  letter-spacing: 0.002em;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.125em;
+  color: #f3f3f4;
+}
+
+.btnContainer {
+  margin-top: auto;
+}
+
+.ctaBtn {
+  background: #0364ff;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 0;
+  font-weight: 700;
+  font-size: 14px;
+  height: 42px;
+  width: 170px;
+}
+
+.ctaBtn.ctaBtnWhite {
+  background: #ffffff;
+  color: #0364ff;
+  margin-left: 16px;
+}
+
+.ctaBtn:hover {
+  background: #3F89FF;
+  text-decoration: none;
+}
+
+.ctaBtn:active {
+  background: #68A2FF;
+}
+
+.ctaBtn.ctaBtnWhite:hover {
+  background: #f3f3f4;
+  text-decoration: none;
+}
+
+.ctaBtn.ctaBtnWhite:active {
+  background: #daf0ff;
+}
+
+@media (max-width: 1156px) {
+  .container {
+    flex-direction: column;
+  }
+  .card {
+    margin-right: 0;
+  }
+}
