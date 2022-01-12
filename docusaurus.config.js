@@ -39,7 +39,7 @@ module.exports = {
       items: [
         {
           label: "Dashboard",
-          href: "https://developer.tor.us",
+          href: "https://dashboard.web3auth.io",
           target: "_self",
           position: "right",
           className: "navbar__button",
@@ -55,12 +55,7 @@ module.exports = {
           to: "/guides",
           position: "left",
           className: "navbar__section-link",
-        },
-        {
-          label: "Contact us",
-          href: contactUrl,
-          position: "right",
-        },
+        }
       ],
     },
     footer: {
