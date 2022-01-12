@@ -23,10 +23,12 @@ const publicAddress = await torus.getPublicAddress(params);
     `reddit`, `discord`
   - `verifierId` - `string` : The unique identifier for that verifier. \(Say
     email for google, username for reddit and id for discord\).
+  - `isExtended` - `boolean` (optional) : Whether to return an extended public key instead
+    of address.
 
 **Returns**
 
-- `Promise<string>` : Returns a promise which resolves to the Solana address
+- `Promise<string | TorusPublicKey>` : Returns a promise which resolves to the Solana address
   associated with the email.
 
 **Reference**
@@ -35,6 +37,22 @@ const publicAddress = await torus.getPublicAddress(params);
 interface VerifierArgs {
   verifier: "google" | "reddit" | "discord";
   verifierId: string;
+  isExtended?: boolean;
+}
+
+interface TorusPublicKey extends TorusNodePub {
+  address: string;
+}
+
+interface TorusNodePub {
+  /**
+   * X component of a Public Key
+   */
+  X: string;
+  /**
+   * Y component of a Public Key
+   */
+  Y: string;
 }
 ```
 
@@ -44,5 +62,13 @@ interface VerifierArgs {
 const publicAddress = await torus.getPublicAddress({
   verifier: "google",
   verifierId: "random@gmail.com",
+});
+```
+
+```javascript
+const publicKeyParams = await torus.getPublicAddress({
+  verifier: "google",
+  verifierId: "random@gmail.com",
+  isExtended: true,
 });
 ```
