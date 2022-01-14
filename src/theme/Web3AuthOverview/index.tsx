@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 export default function Web3AuthOverview() {
   return (
     <div className={styles.container}>
-      <div className={classNames(styles.cardQuickStart, styles.cardQsWeb3)}>
+      <div className={classNames(styles.cardQuickStart)}>
         <div className={styles.content}>
           <p className={styles.headline}>Torus Overview</p>
           <p className={styles.description}>
