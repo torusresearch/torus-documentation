@@ -1,6 +1,20 @@
 .container {
   display: block;
+  background-image: url("/images/web3auth-bg-dots.png"),
+    linear-gradient(138.93deg, #0364ff 14.81%, #1ac7fe 85.98%);
+  background-position: left -280px top -150px, center center;
+  background-size: auto, 100%;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  height: fit-content;
+  padding: 20px;
 }
+
+.cardQuickStart {
+  height: 100%;
+  width: 100%;
+}
+
 .content {
   max-width: 472px;
   height: 100%;
@@ -8,23 +22,9 @@
   flex-flow: column;
 }
 
-/* Quick Start Card */
-.cardQuickStart {
-  background-image: url("/images/web3auth-right.png"), url("/images/web3auth-bg-dots.png"),
-    /* linear-gradient(271.78deg, rgba(0, 0, 0, 0.8) 1.77%, rgba(0, 0, 0, 0) 98.95%), */
-    /* linear-gradient(181.35deg, rgba(0, 0, 0, 0.27) 3.43%, #000746 97.5%), */
-    linear-gradient(138.93deg, #0364ff 14.81%, #1ac7fe 85.98%);
-  background-position: right, left -280px top -150px, center center, center, center;
-  background-size: auto, auto, 100%, 100%, 100%;
-  background-repeat: no-repeat;
-  border-radius: 10px;
-  height: 326px;
-  padding: 45px 55px;
-}
-
 .headline {
   font-weight: 600;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 1.5em;
   letter-spacing: 0.002em;
   color: #ffffff;
@@ -32,13 +32,13 @@
 }
 
 .description {
-  font-size: 16px;
-  line-height: 1.125em;
+  font-size: 15px;
+  line-height: 1.2em;
   color: #f3f3f4;
 }
 
 .btnContainer {
-  margin-top: auto;
+  margin-top: 20px;
 }
 
 .ctaBtn {
@@ -50,7 +50,7 @@
   font-weight: 700;
   font-size: 14px;
   height: 42px;
-  width: 170px;
+  padding: 0 20px;
 }
 
 .ctaBtn.ctaBtnWhite {
@@ -60,12 +60,12 @@
 }
 
 .ctaBtn:hover {
-  background: #3F89FF;
+  background: #3f89ff;
   text-decoration: none;
 }
 
 .ctaBtn:active {
-  background: #68A2FF;
+  background: #68a2ff;
 }
 
 .ctaBtn.ctaBtnWhite:hover {
@@ -77,11 +77,30 @@
   background: #daf0ff;
 }
 
-@media (max-width: 1156px) {
+@media (min-width: 700px) {
   .container {
-    flex-direction: column;
+    background-image: url("/images/web3auth-right.png"), url("/images/web3auth-bg-dots.png"),
+      linear-gradient(138.93deg, #0364ff 14.81%, #1ac7fe 85.98%);
+    background-position: right, left -280px top -150px, center center;
+    background-size: auto, auto, 100%;
+    height: 326px;
+    padding: 45px 55px;
   }
-  .card {
-    margin-right: 0;
+
+  .cardQuickStart {
+    height: 100%;
+    width: calc(100% - 250px);
+  }
+
+  .headline {
+    font-size: 32px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .btnContainer {
+    margin-top: auto;
   }
 }
