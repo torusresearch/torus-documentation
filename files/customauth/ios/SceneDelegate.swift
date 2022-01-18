@@ -3,6 +3,7 @@ import SwiftUI
 import TorusSwiftDirectSDK
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
     var window: UIWindow?
 
     // Handle Universal logins
@@ -68,6 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
 
 struct SceneDelegate_Previews: PreviewProvider {
     static var previews: some View {
