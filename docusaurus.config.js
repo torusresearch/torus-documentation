@@ -28,7 +28,7 @@ module.exports = {
       respectPrefersColorScheme: false, // Set to "true" when Dark mode is ready
     },
     prism: {
-      additionalLanguages: ["groovy", "java", "swift"],
+      additionalLanguages: ["groovy", "java", "kotlin", "swift"],
     },
     navbar: {
       title: "Documentation",
@@ -39,7 +39,7 @@ module.exports = {
       items: [
         {
           label: "Dashboard",
-          href: "https://developer.tor.us",
+          href: "https://dashboard.web3auth.io",
           target: "_self",
           position: "right",
           className: "navbar__button",
@@ -55,12 +55,7 @@ module.exports = {
           to: "/guides",
           position: "left",
           className: "navbar__section-link",
-        },
-        {
-          label: "Contact us",
-          href: contactUrl,
-          position: "right",
-        },
+        }
       ],
     },
     footer: {
@@ -92,7 +87,7 @@ module.exports = {
             },
             {
               label: "CustomAuth",
-              href: "https://directauth.io",
+              href: "https://customauth.io",
             },
             {
               label: "OpenLogin",
@@ -104,7 +99,7 @@ module.exports = {
             },
             {
               label: "Status",
-              href: "https://status.torusnode.com",
+              href: "https://torusstatus.com",
             },
             {
               label: "Support",

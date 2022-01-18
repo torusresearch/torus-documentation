@@ -12,7 +12,7 @@ jobs:
     name: Build and Deploy
     strategy:
       matrix:
-        node: ["14.x"]
+        node: ["16.x"]
         os: [ubuntu-latest]
 
     runs-on: ${{ matrix.os }}

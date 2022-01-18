@@ -16,7 +16,7 @@ This tutorial will guide you on how to integrate CustomAuth with AWS cognito ser
 We will be authenticating users with google idp using aws cognito. However you can can enable other providers from aws cognito console based on your requirements.
 
 You can find
-[the source code of this is example on Github](https://github.com/torusresearch/torus-direct-web-sdk/tree/master/examples/vue-app).
+[the source code of this is example on Github](https://github.com/torusresearch/customauth/tree/master/examples/vue-app).
 
 ## Configuring Cognito user pool in aws cognito.
 
@@ -83,20 +83,20 @@ Do the following steps in order to create your custom verifier:-
 
 ## Let's get started with code by installing depedency using npm
 
-[TorusDirectWebSDK](https://www.npmjs.com/package/@toruslabs/torus-direct-web-sdk)
+[TorusDirectWebSDK](https://www.npmjs.com/package/@toruslabs/customauth)
 [JWTDecode](https://www.npmjs.com/package/jwt-decode)
 
 ```shell
-npm i @toruslabs/torus-direct-web-sdk --save
+npm i @toruslabs/customauth --save
 ```
 
 
 ## Login with Aws cognito hosted ui
 
-In order to login with aws cognito hosted ui, we just have to initialize torus `torus-direct-web-sdk` and call triggerLogin function as given in code snippet below.
+In order to login with aws cognito hosted ui, we just have to initialize torus `customauth` and call triggerLogin function as given in code snippet below.
 
 ```js
- import TorusSdk, { UX_MODE } from "@toruslabs/torus-direct-web-sdk";
+ import TorusSdk, { UX_MODE } from "@toruslabs/customauth";
  ...
  ...
   async mounted() {
@@ -147,6 +147,73 @@ privateKey as a response to triggerLogin function.
   const loginResult = await torusdirectsdk.getRedirectResult();
 ```
 
+
+## Using Private Key with web3 provider:
+
+- You can use this private key to use with `@web3auth/ethereum-provider` which is an EIP1993 compatible wallet provider and this provider can we used to directly invoke blockchain functions using rpc calls or using the provider with web3 js library.
+
+> Prerequisites:
+```
+npm i --save @web3auth/ethereum-provider
+```
+
+- After installing above package you can generate a provider from private key as given below:-
+
+
+```ts
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import type { SafeEventEmitterProvider } from "@web3auth/base";
+
+const provider = await EthereumPrivateKeyProvider.getProviderInstance({
+  chainConfig: {
+    rpcTarget: "https://polygon-rpc.com",
+    chainId: "0x89", // hex chain id
+    networkName: "matic",
+    ticker: "matic",
+    tickerName: "matic",
+  },
+  privKey: "4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318",
+});
+
+```
+
+> Sample Chain Config
+
+```json=
+
+  chainConfig: {
+    rpcTarget: "https://polygon-rpc.com", // your rpc node endpoint of any evm compatible chain
+    chainId: "0x89", // Note: chainId should be in hex format
+    networkName: "Polygon Mainnet",
+    ticker: "matic",
+    tickerName: "matic",
+  }
+```
+
+- Once you have a provider you can inject that provider in to web3 library and invoke any function using web3 like sending transactions, signing messages etc.
+
+For ex:
+
+```ts
+import type { SafeEventEmitterProvider } from "@web3auth/base";
+
+# Signing a message
+const signEthMessage = async (provider: SafeEventEmitterProvider): Promise<string> => {
+  const web3 = new Web3(provider as any);
+  const accounts = await web3.eth.getAccounts();
+  // hex message
+  const message = "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad";
+  const signature = await web3.eth.sign(message, accounts[0]);
+  return signature;
+};
+
+# Fetching latest block from chain
+const fetchLatestBlock = async (provider: SafeEventEmitterProvider): Promise<any> => {
+  const web3 = new Web3(provider as any);
+  const block = await web3.eth.getBlock("latest");
+  return block;
+};
+```
 ## Conclusion
 
 You can use the above private key which is returned as response of `getRedirectResult` in your web3 SDK.
