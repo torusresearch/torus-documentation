@@ -23,7 +23,7 @@
       $(document).ready(async function () {
         $("#login").hide();
 
-        window.customauth = new DirectWebSdk.default({
+        window.customauth = new Customauth.default({
           baseUrl: `${location.origin}/serviceworker`,
           network: "testnet", // details for test net
         });

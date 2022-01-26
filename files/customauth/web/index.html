@@ -21,7 +21,7 @@
       (async function init() {
         $("#login").hide();
 
-        window.customauth = new DirectWebSdk.default({
+        window.customauth = new Customauth.default({
           baseUrl: `${location.origin}/auth`,
           network: "testnet", // details for test net
         });
