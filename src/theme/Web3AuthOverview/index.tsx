@@ -15,10 +15,7 @@ provides auth infrastructure in Web2, the Torus Network powers auth and key mana
           </p>
 
           <div className={styles.btnContainer}>
-            {/* <Link to="https://docs.web3auth.io">
-              <button className={styles.ctaBtn}>Integrate via Web3Auth</button>
-            </Link> */}
-            <Link to="/guides#wallets">
+            <Link to="https://docs.web3auth.io">
               <button className={classNames(styles.ctaBtn, styles.ctaBtnWhite)}>
                 Integrate via Web3Auth
               </button>
