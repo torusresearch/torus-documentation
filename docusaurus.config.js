@@ -70,11 +70,7 @@ module.exports = {
             },
             {
               label: "OpenLogin",
-              href: "https://openlogin.com", // TODO: beta.openlogin.com?
-            },
-            {
-              label: "Torus Extension (coming soon)",
-              href: "#", // TODO: Update later
+              href: "https://app.openlogin.com", // TODO: beta.openlogin.com?
             },
           ],
         },
@@ -99,11 +95,11 @@ module.exports = {
             },
             {
               label: "Status",
-              href: "https://torusstatus.com",
+              href: "https://status.web3auth.io",
             },
             {
               label: "Support",
-              href: "https://t.me/torusdev",
+              href: "https://t.me/web3authdev",
             },
           ],
         },
@@ -113,11 +109,11 @@ module.exports = {
           items: [
             {
               label: "Telegram",
-              href: "https://t.me/TorusLabs",
+              href: "https://t.me/web3auth",
             },
             {
               label: "Twitter",
-              href: "https://twitter.com/TorusLabs",
+              href: "https://twitter.com/web3auth",
             },
             {
               label: "Medium",
@@ -133,7 +129,7 @@ module.exports = {
             },
             {
               label: "LinkedIn",
-              href: "https://www.linkedin.com/company/toruslabs",
+              href: "https://www.linkedin.com/company/web3auth",
             },
             {
               label: "YouTube",
