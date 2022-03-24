@@ -37,7 +37,7 @@
     </p>
     <div>
       Reach out to us at <a href="mailto:hello@tor.us">hello@tor.us</a> or
-      <a href="https://t.me/torusdev">telegram group</a> to get your verifier
+      <a href="https://t.me/web3auth">telegram group</a> to get your verifier
       deployed for your client id.
     </div>
     <div id="console">
