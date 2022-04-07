@@ -100,6 +100,7 @@ module.exports = {
             // "solana-wallet/features/whitelabeling",
           ],
         },
+        "solana-wallet/redirect-flow",
         // {
         //   FAQ: ["solana-wallet/faq-1/developers", "solana-wallet/faq-1/users"],
         // },

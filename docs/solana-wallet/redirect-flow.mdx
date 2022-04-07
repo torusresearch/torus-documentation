@@ -1,0 +1,425 @@
+---
+title: Redirect Flow
+hide_table_of_contents: true
+---
+### _Setup guide to use torus solana wallet on dapps_
+>Solana Redirect Flow is a mechanism with which dapps can support Torus Solana Wallet without adding external libraries in the existing code base. Not only it does it enable to get running in no time, the lean code is easily maintainable.
+
+---
+### How does it work?
+<img style={{display:"block", maxHeight: "500px", margin:"20px auto"}} src="/images/redirect-flow.png"/>
+-------
+## Setup Guide
+#### 1. Sending outbound request :
+```
+const baseURL = `${this.config.base_url}/redirectflow`;
+let requestObj = {
+        jsonrpc: "2.0",
+        method : "<any method name descrived in below list>",
+        id:1,
+        params?: "<corresponding payload(if present) for that method>"
+    };
+```
+- _Convert strigified requestObj to base64-encoded ascii._
+```
+let encodedRequestObj = btoa(JSON.stringify(requestObj));
+```
+
+
+- _Convert each character of resolvePath safely to UTF-8 encoding of the character._
+- _"path" is url where you want to finally land after data from wallet is received eg (window.location.origin + window.location.pathname) ._
+
+```
+const resolvePath = encodeURIComponent(<path>);
+```
+
+- _Construct complete URL_
+```
+url = `${baseURL}?resolveRoute=${resolvePath}#redirectflowdata=${encodedRequestObj}`;
+```
+
+- _Open the url_
+```
+Object.assign(document.createElement("a"), {target: "_blank", href: url}).click();
+```
+
+#### 2. Parsing inbound request :
+- After the solana wallet has done processing your request (success or not), it will open the resolvePath with the data inside "result" hash param.
+```
+let result = new URLSearchParams(window.location.hash.slice(1)).get(result");
+result = result && atob(result);
+console.log("PROCESSED DATA IS", result)
+```
+----
+## Methods, payloads and responses
+
+### Auth Routes
+#### Login
+> **Method** : "login" <br />
+**Response** :
+```
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "success": boolean,
+    "data": {
+      "selectedAddress": boolean
+    },
+    "method": "login"
+  },
+  "id": 1
+}
+```
+
+#### Logout
+> **Method** : "logout" <br />
+**Response** :
+```
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "success": boolean,
+    "data": {
+      "selectedAddress": boolean
+    },
+    "method": "logout"
+  },
+  "id": 1
+}
+```
+
+----
+### Informational Routes
+
+#### User Information
+> **Method** : "user_info" <br />
+**Response** :
+```{
+  "jsonrpc": "2.0",
+  "result": {
+    "data": {
+      "email": "string",
+      "name": "string",
+      "profileImage": "URI",
+      "aggregateVerifier": "string",
+      "verifier": "string",
+      "verifierId": "string",
+      "typeOfLogin": "string",
+      "dappShare": ""
+    },
+    "method": "user_info",
+    "success": boolean
+  },
+  "id": 1
+}
+```
+
+#### Get Provider State
+> **Method** : "get_provider_state" <br />
+**Response** :
+```{
+  "jsonrpc": "2.0",
+  "result": {
+    "data": {
+      "currentLoginProvider": "string",
+      "isLoggedIn": "boolean"
+    },
+    "method": "get_provider_state",
+    "success": boolean
+  },
+  "id": 1
+}
+```
+
+#### Change Provider
+> **Method** : "set_provider" <br />
+ **Payload** : <br />
+```
+{
+  "blockExplorerUrl": "string <eg :https://explorer.solana.com>",
+  "chainId": "string <eg :0x2>",
+  "displayName": "Sstring <eg :Solana Testnet>",
+  "logo": "string <eg :solana.svg>",
+  "rpcTarget": "string <eg :https://api.testnet.solana.com>",
+  "ticker": "string <eg :SOL>",
+  "tickerName": "string <eg :Solana Token>"
+}
+```
+**Response** :
+```{
+  "jsonrpc": "2.0",
+  "result": {
+    "success": boolean,
+    "method": "set_provider"
+  },
+  "id": 1
+}
+```
+
+#### Get Wallet Provider State
+> **Method** : "wallet_get_provider_state" <br />
+**Response** :
+```{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "accounts": [
+    "string <eg :24s5oo1A5BzDvqKgqdem3777kPMnLgWgZFDhC9qGvWNz>"
+   ],
+   "chainId": "string <eg: 0x1>",
+   "isUnlocked": true
+  },
+  "method": "wallet_get_provider_state",
+  "success": boolean
+ },
+ "id": 1
+}
+```
+
+#### Topup
+> **Method** : "topup" <br />
+**Payload** : <br />
+```
+{
+ "params": {
+  "selectedAddress": "string <eg: C4Letg829ytf5PqyEDSdBUWs4T1GT7whYGrZsJreftgW>"
+ },
+ "provider": "moonpay" // only support moonpay atm
+}
+```
+**Response** :
+```
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "success": boolean,
+    "method": "topup"
+  },
+  "id": 1
+}
+```
+
+#### Get Accounts
+> **Method** : "get_accounts" Or "solana_request_accounts"<br />
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": [
+   "string <eg: 24s5oo1A5BzDvqKgqdem3777kPMnLgWgZFDhC9qGvWNz>"
+  ],
+  "method": "get_accounts" OR,
+  "success": boolean
+ },
+ "id": 1
+}
+```
+
+----
+### Wallet Routes
+- transactions are serialized and then converted to hex string before sending
+- eg
+```
+<script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+const conn = new solanaWeb3.Connection(<rpcTarget>);
+const blockhash = (await conn.getRecentBlockhash("finalized")).blockhash;
+```
+```
+const TransactionInstruction = solanaWeb3.SystemProgram.transfer({
+    fromPubkey: new solanaWeb3.PublicKey(
+        <sender public address>
+    ),
+    toPubkey: new solanaWeb3.PublicKey(
+         <receiver  public address>
+    ),
+    lamports: 0.001 * Math.random() * 1000000000,
+});
+```
+```
+let transaction = new solanaWeb3.Transaction({
+    recentBlockhash: blockhash,
+    feePayer: new solanaWeb3.PublicKey(
+        <sender public address>
+    ),
+}).add(TransactionInstruction);
+```
+```
+const transactionPayload = transaction.serialize({requireAllSignatures: false, verifySignatures: false}).toString("hex");
+```
+
+#### Send Transaction
+> **Method** : "send_transaction" <br/>
+**Payload** :
+```
+{
+ "message": "hex string of serialized transaction <eg transactionPayload>"
+}
+```
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "signature": "<signature of the transaction submitted>"
+  },
+  "method": "send_transaction",
+  "success": boolean
+ },
+ "id": 1
+}
+```
+
+#### Send SPL transaction
+> **Method** : "spl_transfer" <br/>
+**Payload** :
+```
+{
+ "mint_add": "string <eg : CpMah17kQEL2wqyMKt3mZBdTnZbkbfx4nqmQMFDP5vwp>",
+ "receiver_add": "string <eg :C4Letg829ytf5PqyEDSdBUWs4T1GT7whYGrZsJreftgW>",
+ "amount": number <eg. 0.1>
+}
+```
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "signature": "<signature of the transaction submitted>"
+  },
+  "method": "spl_transfer",
+  "success": true
+ },
+ "id": 1
+}
+```
+
+#### Sign Transaction
+> **Method** : "sign_transaction" <br/>
+**Payload** :
+```
+{
+ "message": "hex string of serialized transaction <eg transactionPayload>"
+}
+```
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "signature": "<signature of the transaction submitted>"
+  },
+  "method": "sign_transaction",
+  "success": boolean
+ },
+ "id": 1
+}
+```
+
+#### Sign All Transactions
+> **Method** : "sign_all_transactions" <br/>
+**Payload** :
+```
+{
+ "message": "Array of (hex string of serialized transaction <eg transactionPayload>)"
+}
+```
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "signatures": Array of signratures
+  },
+  "method": "sign_all_transactions",
+  "success": boolean
+ },
+ "id": 1
+}
+```
+
+#### Sign Message
+> **Method** : "sign_message" <br/>
+**Payload** :
+```
+{
+ "message": "Uint8Array of message <eg (new TextEncoder()).encode("Example Message")>"
+}
+```
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "signature": <signature of submittion>
+  },
+  "success": true,
+  "method": "sign_message"
+ },
+ "id": 1
+}
+```
+
+#### Get NFTs
+> **Method** : "nft_list" <br/>
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": [
+   {
+    "balance": {
+     "amount": string,
+     "decimals": 0,
+     "uiAmount": number,
+     "uiAmountString": string
+    },
+    "mint": "string <eg :EYc7DKkGxzzy6ekNK1uXnUDdoBd4iDWu1kxgyVz14nZF>",
+    "name": "string <eg I WANT UR NFT>",
+    "uri": "string <eghttps://gateway.pinata.cloud/ipfs/QmcZ3okW4DGFrZjDWLarV8oDmYek3fdLpzrdVAqC7iRojf>"
+   }
+  ],
+  "method": "nft_list",
+  "success": true
+ },
+ "id": 1
+}
+```
+
+#### Send NFTs
+> **Method** : "nft_transfer" <br/>
+**Payload** :
+```
+{
+ "mint_add": "string <eg EYc7DKkGxzzy6ekNK1uXnUDdoBd4iDWu1kxgyVz14nZF>",
+ "receiver_add": "string <eg 24s5oo1A5BzDvqKgqdem3777kPMnLgWgZFDhC9qGvWNz>"
+}
+```
+**Response** :
+```
+{
+ "jsonrpc": "2.0",
+ "result": {
+  "data": {
+   "signature": "<signature of the transaction submitted>"
+  },
+  "method": "nft_transfer",
+  "success": boolean
+ },
+ "id": 1
+```
+-----
+
+
+
+
+
+
+
+
