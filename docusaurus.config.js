@@ -44,12 +44,12 @@ module.exports = {
           position: "right",
           className: "navbar__button",
         },
-        {
-          label: "Integration Builder",
-          to: "/integration-builder",
-          position: "left",
-          className: "navbar__button",
-        },
+        // {
+        //   label: "Integration Builder",
+        //   to: "/integration-builder",
+        //   position: "left",
+        //   className: "navbar__button",
+        // },
         {
           label: "Guides",
           to: "/guides",
