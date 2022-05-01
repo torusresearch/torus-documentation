@@ -4,23 +4,6 @@ module.exports = {
     "README",
     {
       type: "category",
-      label: "OpenLogin",
-      items: [
-        "open-login/get-started",
-        "open-login/what-is-openlogin",
-        {
-          "API Reference": [
-            "open-login/api-reference/installation",
-            "open-login/api-reference/initialization",
-            "open-login/api-reference/usage",
-
-          ],
-        },
-      ],
-
-    },
-    {
-      type: "category",
       label: "Wallet",
       items: [
         "wallet/get-started",
@@ -105,43 +88,6 @@ module.exports = {
         // },
         // "solana-wallet/integration-guidelines",
         // "solana-wallet/changelog",
-      ],
-    },
-    {
-      type: "category",
-      label: "CustomAuth",
-      items: [
-        "customauth/get-started",
-        "customauth/what-is-customauth",
-        "customauth/integrating-customauth",
-        {
-          "API Reference": [
-            "customauth/api-reference/installation",
-            "customauth/api-reference/initialization",
-            "customauth/api-reference/usage",
-
-          ],
-        },
-        "customauth/designing-your-key-management-architecture",
-        "customauth/verifiers",
-        {
-          "Setting up Verifiers on Developer Dashboard": [
-            "customauth/setting-up-verifiers/seting-up-verifiers",
-            "customauth/setting-up-verifiers/custom-verifier",
-          ],
-        },
-        {
-          "Compatiblity and common patterns": [
-            "customauth/compatibility-and-common-patterns/README",
-            "customauth/compatibility-and-common-patterns/gasless-meta-transactions",
-            "customauth/compatibility-and-common-patterns/scalability-layer2-solutions",
-            "customauth/compatibility-and-common-patterns/password-manager-flow",
-            "customauth/compatibility-and-common-patterns/tkey",
-          ],
-        },
-        "customauth/linking-accounts",
-        "customauth/redirects-and-service-workers",
-        "customauth/faq",
       ],
     },
     {
