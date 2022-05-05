@@ -4,23 +4,6 @@ module.exports = {
     "README",
     {
       type: "category",
-      label: "OpenLogin",
-      items: [
-        "open-login/get-started",
-        "open-login/what-is-openlogin",
-        {
-          "API Reference": [
-            "open-login/api-reference/installation",
-            "open-login/api-reference/initialization",
-            "open-login/api-reference/usage",
-
-          ],
-        },
-      ],
-
-    },
-    {
-      type: "category",
       label: "Wallet",
       items: [
         "wallet/get-started",
@@ -109,43 +92,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "CustomAuth",
-      items: [
-        "customauth/get-started",
-        "customauth/what-is-customauth",
-        "customauth/integrating-customauth",
-        {
-          "API Reference": [
-            "customauth/api-reference/installation",
-            "customauth/api-reference/initialization",
-            "customauth/api-reference/usage",
-
-          ],
-        },
-        "customauth/designing-your-key-management-architecture",
-        "customauth/verifiers",
-        {
-          "Setting up Verifiers on Developer Dashboard": [
-            "customauth/setting-up-verifiers/seting-up-verifiers",
-            "customauth/setting-up-verifiers/custom-verifier",
-          ],
-        },
-        {
-          "Compatiblity and common patterns": [
-            "customauth/compatibility-and-common-patterns/README",
-            "customauth/compatibility-and-common-patterns/gasless-meta-transactions",
-            "customauth/compatibility-and-common-patterns/scalability-layer2-solutions",
-            "customauth/compatibility-and-common-patterns/password-manager-flow",
-            "customauth/compatibility-and-common-patterns/tkey",
-          ],
-        },
-        "customauth/linking-accounts",
-        "customauth/redirects-and-service-workers",
-        "customauth/faq",
-      ],
-    },
-    {
-      type: "category",
       label: "Torus Key Infrastructure",
       items: [
         "key-infrastructure/overview",
@@ -164,6 +110,66 @@ module.exports = {
         },
         "key-infrastructure/node-operators",
         "key-infrastructure/audits",
+      ],
+    },
+    {
+      type: "category",
+      label: "Deprecated",
+      items: [
+        "deprecated/deprecated",
+        {
+          type: "category",
+          label: "CustomAuth",
+          items: [
+            "deprecated/customauth/get-started",
+            "deprecated/customauth/what-is-customauth",
+            "deprecated/customauth/integrating-customauth",
+            {
+              "API Reference": [
+                "deprecated/customauth/api-reference/installation",
+                "deprecated/customauth/api-reference/initialization",
+                "deprecated/customauth/api-reference/usage",
+
+              ],
+            },
+            "deprecated/customauth/designing-your-key-management-architecture",
+            "deprecated/customauth/verifiers",
+            {
+              "Setting up Verifiers on Developer Dashboard": [
+                "deprecated/customauth/setting-up-verifiers/seting-up-verifiers",
+                "deprecated/customauth/setting-up-verifiers/custom-verifier",
+              ],
+            },
+            {
+              "Compatiblity and common patterns": [
+                "deprecated/customauth/compatibility-and-common-patterns/README",
+                "deprecated/customauth/compatibility-and-common-patterns/gasless-meta-transactions",
+                "deprecated/customauth/compatibility-and-common-patterns/scalability-layer2-solutions",
+                "deprecated/customauth/compatibility-and-common-patterns/password-manager-flow",
+                "deprecated/customauth/compatibility-and-common-patterns/tkey",
+              ],
+            },
+            "deprecated/customauth/linking-accounts",
+            "deprecated/customauth/redirects-and-service-workers",
+            "deprecated/customauth/faq",
+          ],
+        },
+        {
+          type: "category",
+          label: "OpenLogin",
+          items: [
+            "deprecated/open-login/get-started",
+            "deprecated/open-login/what-is-openlogin",
+            {
+              "API Reference": [
+                "deprecated/open-login/api-reference/installation",
+                "deprecated/open-login/api-reference/initialization",
+                "deprecated/open-login/api-reference/usage",
+
+              ],
+            },
+          ],
+        },
       ],
     },
     {
