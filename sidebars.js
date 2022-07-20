@@ -65,7 +65,6 @@ module.exports = {
               "solana-wallet/api-reference/solana/send-transaction",
               "solana-wallet/api-reference/solana/sign-transaction",
               "solana-wallet/api-reference/solana/sign-message",
-              "solana-wallet/api-reference/solana/gasless-transaction",
             ],
           },
           "solana-wallet/api-reference/solana-adapter"
