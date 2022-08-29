@@ -31,6 +31,8 @@ The Torus constructor takes an object with `TorusCtorArgs` as input.
 **Parameters**
 
 - `options` - `TorusCtorArgs` \(optional\) : The options of the constructor
+  - `modalZIndex` - `number` (optional) : Z-index of the modal and iframe
+    Default values 99999
 
 **Returns**
 
@@ -139,7 +141,15 @@ export interface TorusParams {
 ### `whiteLabel`
 
 ```typescript
-interface WhiteLabelParams {
+export interface WhiteLabelParams {
+  /**
+   * App name to display in the UI
+   */
+  name?: string;
+  /**
+   * App url
+   */
+  url?: string;
   /**
    * Whitelabel theme
    */
@@ -165,36 +175,12 @@ interface WhiteLabelParams {
    */
   topupHide?: boolean;
   /**
-   * Shows/hides billboard in torus-website.
-   * Defaults to false
-   * @defaultValue false
-   */
-  featuredBillboardHide?: boolean;
-  /**
-   * Shows/hides disclaimers on login page. Only works if special logins are hidden
-   * Defaults to false
-   * @defaultValue false
-   */
-  disclaimerHide?: boolean;
-  /**
-   * Language specific link for terms and conditions on torus-website. See (examples/vue-app) to configure
-   */
-  tncLink?: LocaleLinks<string>;
-  /**
-   * Language specific link for privacy policy on torus-website. See (examples/vue-app) to configure
-   */
-  privacyPolicy?: LocaleLinks<string>;
-  /**
-   * Language specific link for privacy policy on torus-website. See (examples/vue-app) to configure
-   */
-  contactLink?: LocaleLinks<string>;
-  /**
    * Custom translations. See (examples/vue-app) to configure
    */
   customTranslations?: LocaleLinks<unknown>;
 }
 
-interface ThemeParams {
+export interface ThemeParams {
   /**
    * If true, enables dark mode
    * Defaults to false
