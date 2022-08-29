@@ -31,7 +31,7 @@ The Torus constructor takes an object with `TorusCtorArgs` as input.
 **Parameters**
 
 - `options` - `TorusCtorArgs` \(optional\) : The options of the constructor
-  - `modalZIndex` - `number` \(optional\) : Z-index of the modal and iframe
+  - `modalZIndex` - `number` (optional) : Z-index of the modal and iframe
     Default values 99999
 
 **Returns**
@@ -59,8 +59,10 @@ await torus.init(params);
 - `params` - `TorusParams` \(optional\) : The parameters passed to initialize
   Torus object
 
-  - `buttonPosition`: `BUTTON_POSITION_TYPE`\(optional\)
-  - `apiKey` - `string` \(optional\) : Api key - Get yours today at {@link https://developer.tor.us | Dashboard}
+  - `buttonPosition`: "top-left" | "top-right" | "bottom-right" | "bottom-left";
+    \(optional\)
+  - `apiKey` - `string` \(optional\) : Api key - Get yours today at
+    https://developer.tor.us
   - `network` - `NetworkInterface` \(optional\) : The network options. Used for
     setting a default network
   - `buildEnv` - `enum` \(optional\): The build environment to use. Supported
@@ -68,9 +70,12 @@ await torus.init(params);
   - `enableLogging` - `boolean` \(optional\) : Enables/disables logging. Useful
     for debugging
   - `showTorusButton` - `boolean` \(optional\) : Shows/Hides the Torus Button
-  - `useLocalStorage`-`boolean` \(optional\) : Prefers to use localStorage instead of sessionStorage for torus iframe.
-   Allows longer lived sessions. By default torus iframe uses sessionStorage. Set this param as `true` to use
-   localStorage.
+  - `useLocalStorage`-`boolean` \(optional\) : Prefers to use localStorage
+    instead of sessionStorage for torus iframe. Allows longer lived sessions. By
+    default torus iframe uses sessionStorage. Set this param as `true` to use
+    localStorage.
+  - `whitelabel` - `WhiteLabelParams` Params to enable whitelabelling of torus
+    website and widget.
 
 **Returns**
 
@@ -79,7 +84,6 @@ await torus.init(params);
 **Reference**
 
 ```typescript
-
 export interface TorusParams {
   /**
    * Determines where the torus widget is visible on the page.
@@ -127,12 +131,103 @@ export interface TorusParams {
    * @default false
    */
   useLocalStorage?: boolean;
+  /**
+   * Params to enable whitelabelling of torus website and widget
+   */
+  whiteLabel?: WhiteLabelParams;
+}
+```
+
+### `whiteLabel`
+
+```typescript
+export interface WhiteLabelParams {
+  /**
+   * App name to display in the UI
+   */
+  name?: string;
+  /**
+   * App url
+   */
+  url?: string;
+  /**
+   * Whitelabel theme
+   */
+  theme: ThemeParams;
+  /**
+   * Language of whitelabel.
+   *
+   * order of preference: Whitelabel language \> user language (in torus-website) \> browser language
+   */
+  defaultLanguage?: string;
+  /**
+   * Logo Url to be used in light mode (dark logo)
+   */
+  logoDark: string;
+  /**
+   * Logo Url to be used in dark mode (light logo)
+   */
+  logoLight: string;
+  /**
+   * Shows/hides topup option in torus-website/widget.
+   * Defaults to false
+   * @defaultValue false
+   */
+  topupHide?: boolean;
+  /**
+   * Custom translations. See (examples/vue-app) to configure
+   */
+  customTranslations?: LocaleLinks<unknown>;
 }
 
+export interface ThemeParams {
+  /**
+   * If true, enables dark mode
+   * Defaults to false
+   * @defaultValue false
+   */
+  isDark: boolean;
+  /**
+   * Colors object to customize colors in torus theme.
+   *
+   * Contact us for whitelabel. Example provided in `examples/vue-app`
+   */
+  colors: Record<string, string>;
+}
+
+type Record<K extends keyof any, T> = {
+  [P in K]: T;
+};
+
+export interface LocaleLinks<T> {
+  /**
+   * Item corresponding to english
+   */
+  en?: T;
+  /**
+   * Item corresponding to japanese
+   */
+  ja?: T;
+  /**
+   * Item corresponding to korean
+   */
+  ko?: T;
+  /**
+   * Item corresponding to german
+   */
+  de?: T;
+  /**
+   * Item corresponding to chinese (simplified)
+   */
+  zh?: T;
+  /**
+   * Item corresponding to spanish
+   */
+  es?: T;
+}
 ```
 
 ```typescript
-
 export interface NetworkInterface {
   /**
    * Block explorer url for the chain
@@ -169,10 +264,9 @@ export interface NetworkInterface {
    */
   displayName: string;
 }
-
 ```
 
-**Examples**
+### Example
 
 ```javascript
 await torus.init();
@@ -183,6 +277,12 @@ await torus.init({
   buildEnv: "testing", // uses solana-testing.tor.us
   enableLogging: false, // default : false
   showTorusButton: false, // default: true
+  whiteLabel: {
+    theme: { isDark: true, colors: { torusBrand1: "#00a8ff" } },
+    logoDark: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
+    logoLight: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
+    topupHide: true,
+  },
 });
 ```
 

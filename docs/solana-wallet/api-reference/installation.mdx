@@ -62,10 +62,28 @@ import Torus from "@toruslabs/solana-embed";
 
 const torus = new Torus();
 await torus.init({
-  buttonPosition: "top-left", // default: bottom-left
-  buildEnv: "production", // default: production
+  buildEnv: "testing", // "production", or "developement" are also the option
   enableLogging: true, // default: false
+  network: {
+    blockExplorerUrl: "https://explorer.solana.com/?cluster=testnet", // devnet and mainnet
+    chainId: "0x2",
+    displayName: "Solana Testnet",
+    logo: "solana.svg",
+    rpcTarget: clusterApiUrl("testnet"), // from "@solana/web3.js" package
+    ticker: "SOL",
+    tickerName: "Solana Token",
+  },
   showTorusButton: false, // default: true
+  useLocalStorage: true, // default: false to use sessionStorage
+  buttonPosition: "top-left", // default: bottom-left
+  apiKey: "api-key from web3auth dashboard" // https://developer.web3auth.io
+  whiteLabel: {
+    name: "Whitelabel Demo",
+    theme: { isDark: true, colors: { torusBrand1: "#00a8ff" } },
+    logoDark: "https://solana-testing.tor.us/img/solana-logo-light.46db0c8f.svg",
+    logoLight: "https://solana-testing.tor.us/img/solana-logo-light.46db0c8f.svg",
+    topupHide: true,
+  },
 });
 await torus.login();
 ```
@@ -76,8 +94,8 @@ await torus.login();
 
 ## Development Environment
 
-If you are developing with the Torus Wallet in a local environment,
-https is necessary to interact with solana.tor.us.
+If you are developing with the Torus Wallet in a local environment, https is
+necessary to interact with solana.tor.us.
 
 In general, the Torus wallet integration only works in a secure browser
 environment, as it needs access to browser APIs like window.open and
