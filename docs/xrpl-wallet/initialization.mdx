@@ -1,0 +1,328 @@
+---
+title: Initialization
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+---
+
+After Installation, the next step to use XRPL Embed is to Initialize the SDK and
+that is achieved by `init()` function.
+
+Please note that these are the most critical steps where you need to pass on
+different parameters according to the preference of your project. Additionally,
+Whitelabeling and Custom Authentication have to be configured within this step,
+if you wish to customise your XRPL Instance.
+
+## Instantiating XRPL Embed
+
+#### Import the `Torus` class from `@toruslabs/xrpl-embed`.
+
+<Tabs
+  defaultValue="es6"
+  values={[
+    { label: "ES6", value: "es6" },
+    { label: "CommonJS", value: "cjs" },
+  ]}
+>
+
+<TabItem value="es6">
+
+```javascript
+import { Torus } from "@toruslabs/xrpl-embed";
+```
+
+</TabItem>
+
+<TabItem value="cjs">
+
+```javascript
+const Torus = require("@toruslabs/xrpl-embed");
+```
+
+</TabItem>
+
+</Tabs>
+
+#### Assign the `Torus` class to a variable
+
+```javascript
+const torus = new Torus(Options);
+```
+
+The Torus constructor takes an object with `TorusCtorArgs` as input.
+
+### Arguments
+
+#### `Options`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter        | Type            | Description                                     | Mandatory | Default |
+| ---------------- | --------------- | ----------------------------------------------- | --------- | ------- |
+| `options` object | `TorusCtorArgs` | `modalZIndex`: Z-index of the modal and iframe. | No        | `99999` |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```ts
+export interface TorusCtorArgs {
+  modalZIndex?: number;
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+## Initializing XRPL Embed
+
+`init()` function is used to initialize the XRPL Embed SDK. It takes an object
+with `TorusParams` as input.
+
+### Arguments
+
+#### `TorusParams`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter         | Type                   | Options                                                | Description                                                                                           |
+| ----------------- | ---------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `buttonPosition`  | `BUTTON_POSITION_TYPE` | `bottom-left`, `top-left`, `bottom-right`, `top-right` | Determines where the torus widget is visible on the page.                                             |
+| `apiKey`          | `string`               |                                                        | Api key. Get yours today at https://developer.tor.us                                                  |
+| `network`         | `NetworkInterface`     |                                                        | Torus Network Object                                                                                  |
+| `buildEnv`        | `TORUS_BUILD_ENV_TYPE` | `production`, `development`, `testing`                 | Build Environment of Torus.                                                                           |
+| `enableLogging`   | `boolean`              |                                                        | Enables or disables logging.                                                                          |
+| `showTorusButton` | `boolean`              |                                                        | whether to show/hide torus widget.                                                                    |
+| `useLocalStorage` | `boolean`              |                                                        | Prefers to use localStorage instead of sessionStorage for torus iframe. Allows longer lived sessions. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```ts
+export interface TorusParams {
+  /**
+   * Determines where the torus widget is visible on the page.
+   * @defaultValue bottom-left
+   */
+  buttonPosition?: BUTTON_POSITION_TYPE;
+  /**
+   * Api key
+   * Get yours today at {@link https://developer.tor.us | Dashboard}
+   */
+  apiKey?: string;
+
+  /**
+   * Torus Network Object
+   */
+  network?: NetworkInterface;
+  /**
+   * Build Environment of Torus.
+   *
+   * production uses https://xrpl.tor.us,
+   *
+   * development uses http://localhost:4050 (expects torus-website to be run locally),
+   *
+   * testing uses https://xrpl-testing.tor.us (latest internal build)
+   * @defaultValue production
+   */
+  buildEnv?: TORUS_BUILD_ENV_TYPE;
+  /**
+   * Enables or disables logging.
+   *
+   * Defaults to false in prod and true in other environments
+   */
+  enableLogging?: boolean;
+  /**
+   * whether to show/hide torus widget.
+   *
+   * Defaults to true
+   * @defaultValue true
+   */
+  showTorusButton?: boolean;
+  /**
+   * Prefers to use localStorage instead of sessionStorage for torus iframe. Allows longer lived sessions
+   *
+   * Defaults to false
+   * @defaultValue false
+   */
+  useLocalStorage?: boolean;
+}
+
+export const BUTTON_POSITION = {
+  BOTTOM_LEFT: "bottom-left",
+  TOP_LEFT: "top-left",
+  BOTTOM_RIGHT: "bottom-right",
+  TOP_RIGHT: "top-right",
+} as const;
+
+export interface NetworkInterface {
+  /**
+   * Block explorer url for the chain
+   * @example https://ropsten.etherscan.io
+   */
+  blockExplorerUrl: string;
+  /**
+   * Logo url for the base token
+   */
+  logo: string;
+  /**
+   * Name for ticker
+   * @example 'Binance Token', 'Ethereum', 'Matic Network Token'
+   */
+  tickerName: string;
+  /**
+   * Symbol for ticker
+   * @example BNB, ETH
+   */
+  ticker: string;
+  /**
+   * RPC target Url for the chain
+   * @example https://ropsten.infura.io/v3/YOUR_API_KEY
+   */
+  rpcTarget: string;
+  /**
+   * Chain Id parameter(hex with 0x prefix) for the network. Mandatory for all networks. (assign one with a map to network identifier for platforms)
+   * @example 0x1 for mainnet, 'loading' if not connected to anything yet or connection fails
+   * @defaultValue 'loading'
+   */
+  chainId: string;
+  /**
+   * Display name for the network
+   */
+  displayName: string;
+
+  /**
+   * xrpl Network Key
+   */
+  networkKey: string;
+}
+
+export const TORUS_BUILD_ENV = {
+  PRODUCTION: "production",
+  DEVELOPMENT: "development",
+  TESTING: "testing",
+} as const;
+```
+
+</TabItem>
+
+</Tabs>
+
+#### `network`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter          | Type     | Description                                                                                                                                     |
+| ------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `blockExplorerUrl` | `string` | Block explorer url for the chain                                                                                                                |
+| `logo`             | `string` | Logo url for the base token                                                                                                                     |
+| `tickerName`       | `string` | Name for ticker                                                                                                                                 |
+| `ticker`           | `string` | Symbol for ticker                                                                                                                               |
+| `rpcTarget`        | `string` | RPC target Url for the chain                                                                                                                    |
+| `chainId`          | `string` | Chain Id parameter(hex with 0x prefix) for the network. Mandatory for all networks. (assign one with a map to network identifier for platforms) |
+| `displayName`      | `string` | Display name for the network                                                                                                                    |
+| `networkKey`       | `string` | xrpl Network Key                                                                                                                                |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```ts
+export interface NetworkInterface {
+  /**
+   * Block explorer url for the chain
+   * @example https://ropsten.etherscan.io
+   */
+  blockExplorerUrl: string;
+  /**
+   * Logo url for the base token
+   */
+  logo: string;
+  /**
+   * Name for ticker
+   * @example 'Binance Token', 'Ethereum', 'Matic Network Token'
+   */
+  tickerName: string;
+  /**
+   * Symbol for ticker
+   * @example BNB, ETH
+   */
+  ticker: string;
+  /**
+   * RPC target Url for the chain
+   * @example https://ropsten.infura.io/v3/YOUR_API_KEY
+   */
+  rpcTarget: string;
+  /**
+   * Chain Id parameter(hex with 0x prefix) for the network. Mandatory for all networks. (assign one with a map to network identifier for platforms)
+   * @example 0x1 for mainnet, 'loading' if not connected to anything yet or connection fails
+   * @defaultValue 'loading'
+   */
+  chainId: string;
+  /**
+   * Display name for the network
+   */
+  displayName: string;
+
+  /**
+   * xrpl Network Key
+   */
+  networkKey: string;
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Example
+
+```javascript
+await torus.init({
+  buildEnv: "developement", // "production", or "developement" are also the option
+  enableLogging: true, // default: false
+  network: {
+    chainId: "0x1",
+    logo: "", // TODO
+    rpcTarget: "https://ripple-node.tor.us",
+    wsTarget: "wss://s2.ripple.com",
+    ticker: "XRP",
+    tickerName: "XRPL",
+    displayName: "xrpl mainnet",
+    blockExplorerUrl: "https://livenet.xrpl.org",
+    networkKey: "mainnet",
+  },
+  showTorusButton: false, // default: true
+  useLocalStorage: true, // default: false to use sessionStorage
+  buttonPosition: "top-left", // default: bottom-left
+  apiKey: "api-key from web3auth dashboard", // https://developer.web3auth.io
+});
+```

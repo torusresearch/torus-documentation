@@ -48,7 +48,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Solana Wallet",
+      label: "xrpl Wallet",
       items: [
         "solana-wallet/get-started",
         "solana-wallet/what-is-wallet",
@@ -88,6 +88,41 @@ module.exports = {
         // },
         // "solana-wallet/integration-guidelines",
         // "solana-wallet/changelog",
+      ],
+    },
+    {
+      type: "category",
+      label: "XRPL Wallet",
+      link: { type: "doc", id: "xrpl-wallet/xrpl-wallet" },
+      items: [
+        "xrpl-wallet/installation",
+        "xrpl-wallet/initialization",
+        {
+          "API Reference": [
+            "xrpl-wallet/api-reference/account",
+            "xrpl-wallet/api-reference/display",
+            "xrpl-wallet/api-reference/topup",
+            {
+              "XRPL API": [
+                "xrpl-wallet/api-reference/xrpl/send-transaction",
+                "xrpl-wallet/api-reference/xrpl/sign-transaction",
+                "xrpl-wallet/api-reference/xrpl/sign-message",
+              ],
+            },
+            "xrpl-wallet/api-reference/xrpl-adapter"
+          ],
+        },
+        {
+          Features: [
+            "xrpl-wallet/features/accountrecovery",
+            "xrpl-wallet/features/purchasecryptocurrency",
+            "xrpl-wallet/features/exportprivatekey",
+            // "xrpl-wallet/features/language",
+            "xrpl-wallet/features/themes",
+            "xrpl-wallet/features/pwa",
+            // "xrpl-wallet/features/whitelabeling",
+          ],
+        },
       ],
     },
     {
