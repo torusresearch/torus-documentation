@@ -66,7 +66,10 @@ export default function ProductSuiteStack() {
                 <li>Connect up to any blockchain</li>
               </ul>
               <hr />
-              <Link to="/open-login/get-started" className={styles.link}>
+              <Link
+                to="/deprecated/open-login/get-started"
+                className={styles.link}
+              >
                 Get started
               </Link>
             </div>
@@ -141,7 +144,10 @@ export default function ProductSuiteStack() {
                 <li>Leverage on Torus' key infrastructure</li>
               </ul>
               <hr />
-              <Link to="/customauth/get-started" className={styles.link}>
+              <Link
+                to="/deprecated/customauth/get-started"
+                className={styles.link}
+              >
                 Get started
               </Link>
             </div>

@@ -11,7 +11,9 @@ import TabItem from "@theme/TabItem";
 
 ## Introduction
 
-This tutorial will guide you to use [openlogin-swift-sdk](https://github.com/torusresearch/openlogin-swift-sdk) to integrate OpenLogin into your iOS application.
+This tutorial will guide you to use
+[openlogin-swift-sdk](https://github.com/torusresearch/openlogin-swift-sdk) to
+integrate OpenLogin into your iOS application.
 
 Source code of the example can also be found in the repository.
 
@@ -23,7 +25,8 @@ Source code of the example can also be found in the repository.
 
 ## Installation
 
-If you are using the Swift Package Manager, open the following menu item in Xcode:
+If you are using the Swift Package Manager, open the following menu item in
+Xcode:
 
 **File > Swift Packages > Add Package Dependency...**
 
@@ -67,11 +70,14 @@ import OpenLogin
 
 ## Configuration
 
-In order to use OpenLogin you need to provide your OpenLogin **ClientId** and which **Network** to run it.
+In order to use OpenLogin you need to provide your OpenLogin **ClientId** and
+which **Network** to run it.
 
-- Go to [Torus Developer](https://developer.tor.us), create or open an existing OpenLogin project and copy your project ID, which is the **ClientId**.
+- Go to [Torus Developer](https://developer.tor.us), create or open an existing
+  OpenLogin project and copy your project ID, which is the **ClientId**.
 
-In your application bundle add a plist file named **OpenLogin.plist** with the following information:
+In your application bundle add a plist file named **OpenLogin.plist** with the
+following information:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -88,4 +94,6 @@ In your application bundle add a plist file named **OpenLogin.plist** with the f
 
 ## Next steps
 
-See our [API reference](https://docs.tor.us/open-login/api-reference/usage) for more advanced usage.
+See our
+[API reference](https://docs.tor.us/deprecated/open-login/api-reference/usage)
+for more advanced usage.
