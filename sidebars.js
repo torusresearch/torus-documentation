@@ -60,14 +60,15 @@ module.exports = {
             "solana-wallet/api-reference/display",
             // "solana-wallet/api-reference/address-resolver",
             "solana-wallet/api-reference/topup",
-            { "Solana API" : [
-              // "solana-wallet/api-reference/solana/solana-api",
-              "solana-wallet/api-reference/solana/send-transaction",
-              "solana-wallet/api-reference/solana/sign-transaction",
-              "solana-wallet/api-reference/solana/sign-message",
-            ],
-          },
-          "solana-wallet/api-reference/solana-adapter"
+            {
+              "Solana API": [
+                // "solana-wallet/api-reference/solana/solana-api",
+                "solana-wallet/api-reference/solana/send-transaction",
+                "solana-wallet/api-reference/solana/sign-transaction",
+                "solana-wallet/api-reference/solana/sign-message",
+              ],
+            },
+            "solana-wallet/api-reference/solana-adapter"
           ],
         },
         {
@@ -96,16 +97,16 @@ module.exports = {
         "key-infrastructure/overview",
         "key-infrastructure/technical-architecture",
         {
-        type: "category",
-        label: "Role of Torus nodes",
-        items:[
-          "key-infrastructure/role-of-torus-nodes/overview",
-          "key-infrastructure/role-of-torus-nodes/lifecycle",
-          "key-infrastructure/role-of-torus-nodes/key-generation-and-resharing",
-        "key-infrastructure/role-of-torus-nodes/logins-key-assignments-and-retrievals",
-        "key-infrastructure/role-of-torus-nodes/oauth2-vs-proxy-sign-in",
-        "key-infrastructure/role-of-torus-nodes/dkg-specification"
-      ],
+          type: "category",
+          label: "Role of Torus nodes",
+          items: [
+            "key-infrastructure/role-of-torus-nodes/overview",
+            "key-infrastructure/role-of-torus-nodes/lifecycle",
+            "key-infrastructure/role-of-torus-nodes/key-generation-and-resharing",
+            "key-infrastructure/role-of-torus-nodes/logins-key-assignments-and-retrievals",
+            "key-infrastructure/role-of-torus-nodes/oauth2-vs-proxy-sign-in",
+            "key-infrastructure/role-of-torus-nodes/dkg-specification"
+          ],
         },
         "key-infrastructure/node-operators",
         "key-infrastructure/audits",
@@ -164,7 +165,6 @@ module.exports = {
                 "deprecated/open-login/api-reference/installation",
                 "deprecated/open-login/api-reference/initialization",
                 "deprecated/open-login/api-reference/usage",
-
               ],
             },
           ],
