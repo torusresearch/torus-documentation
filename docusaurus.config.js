@@ -174,12 +174,11 @@ module.exports = {
       },
       copyright: `© ${new Date().getFullYear()} Torus Labs Private Limited`,
     },
-    gtag: {
-      trackingID: "UA-126622802-2",
-    },
     algolia: {
+      appId: "6OF28D8CMV",
       apiKey: "bfa3491434f947c6262b60ce9b66471c",
       indexName: "torus",
+      schedule: "every 1 day at 3:00 pm",
     },
   },
   presets: [
@@ -190,7 +189,7 @@ module.exports = {
           routeBasePath: "/",
           editUrl: githubEditUrl,
           sidebarPath: require.resolve("./sidebars.js"),
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [remarkMath, [require("@docusaurus/remark-plugin-npm2yarn"), { sync: true }]],
           rehypePlugins: [[rehypeKatex, { strict: false }]],
         },
         /** Uncomment to enable Blog features, see https://v2.docusaurus.io/docs/blog
@@ -202,12 +201,15 @@ module.exports = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+        gtag: {
+          trackingID: "UA-126622802-2",
+        },
       },
     ],
   ],
   plugins: [
     path.resolve(__dirname, "plugins", "docusaurus-plugin-guides"),
-    path.resolve(__dirname, "plugins", "docusaurus-plugin-mdx-components"),
+    // path.resolve(__dirname, "plugins", "docusaurus-plugin-mdx-components"),
     [
       path.resolve(__dirname, "plugins", "docusaurus-plugin-virtual-files"),
       { rootDir: "files" },
