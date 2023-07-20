@@ -35,7 +35,6 @@ const paymentStatus = await torus.initiateTopup(provider, params);
 
 The list of `PAYMENT_PROVIDER_TYPE`:
 
-- `simplex`
 - `topper`
 
 ### `PaymentParams`
@@ -80,7 +79,7 @@ export interface PaymentParams {
 
 ```javascript
 // Default using wallet selected address
-const result = await torus?.initiateTopup("simplex" as any, {
+const result = await torus?.initiateTopup("topper" as any, {
   selectedCurrency: "USD",
   cryptoAmount: 100,
   selectedCryptoCurrency: "XRP",
