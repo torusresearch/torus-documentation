@@ -2,20 +2,17 @@
 title: Topup
 ---
 
-Cryptocurrency purchases through our fiat-to-crypto partners.
+Top-up your cryptocurrency through our fiat-to-crypto partners with ease.
 
 ---
 
 ## `initiateTopup`
 
-Initiates a top up tx with the specified provider right from the dapp. Please
-refer below for supported values of params and providers
+Use the `initiateTopup` function to start a top-up transaction with the selected provider from the dapp. Check the list below for supported values of parameters and providers.
 
-*Currently only Ramp Network is supported.
+:::info NOTE
 
-:::info
-
-Topup api doesn't require the user to be logged in with Torus
+You don't need to be logged in with Torus to use the top-up API.
 
 :::
 
@@ -25,68 +22,73 @@ const paymentStatus = await torus.initiateTopup(provider, params);
 
 **Parameters**
 
-- `provider` - `enum` \(required\) : The specified payment partner. Supported
-  options for provider are `moonpay` `wyre` `coindirect`
-- `params` - `PaymentParams` \(optional\) : The topup tx params. used to
-  autofill the form for that specific provider
-  - `selectedAddress` - `string` \(optional\): The address to top up
-  - `selectedCurrency` - `string` \(optional\) : The fiat currency supported.
-    e.g.: "USD". In case an unsupported currency is specified, it throws
-  - `fiatValue` - `Number` \(optional\) : The fiat value. It must be between the
-    max and min value supported by that provider
-  - `selectedCryptoCurrency` - `string` \(optional\) : The crypto currency
-    supported. e.g.: "SOLANA_SOL". In case an unsupported crypto currency is specified,
-    it throws
-  - `cryptoAmount` - `Number` \(optional\) : The crypto currency amount. Converted fiat value must be between the
-    max and min value supported by that provider
+| Name     | Type                    | Description                                                               | Mandatory |
+| :------- | :---------------------- | :------------------------------------------------------------------------ | :-------- |
+| provider | `PAYMENT_PROVIDER_TYPE` | The specified payment provider partner.                                   | Yes       |
+| params   | `PaymentParams`         | The topup tx params. used to autofill the form for that specific provider | Yes       |
 
 **Returns**
 
-- `Promise<boolean>` : Returns a promise which resolves to a `boolean`
-  indicating whether user has successfully completed the flow
+- `Promise<boolean>` : Returns a promise which resolves to a `boolean` indicating whether the user has successfully completed the top-up flow.
 
-**Reference**
+### `PAYMENT_PROVIDER_TYPE`
 
-```javascript
-torus.paymentProviders = {
-  rampnetwork: {
-    minOrderValue: 1,
-    maxOrderValue: 100,
-    validCryptoCurrencies: ["SOLANA_SOL", "SOLANA_USDC"],
-  },
-};
-```
+The list of `PAYMENT_PROVIDER_TYPE`:
+
+- `moonpay`
+- `wyre`
+- `rampnetwork`
+- `xanpool`
+- `transak`
+- `mercuryo`
+
+### `PaymentParams`
+
+**Parameters**
+
+| Name                   | Type     | Description                                               | Mandatory |
+| :--------------------- | :------- | :-------------------------------------------------------- | :-------- |
+| selectedAddress        | `string` | Address to send the funds to                              | No        |
+| selectedCurrency       | `string` | Default fiat currency for the user to make the payment in | No        |
+| selectedCryptoCurrency | `string` | Cryptocurrency to buy                                     | No        |
+| cryptoAmount           | `number` | Amount Cryptocurrency to buy                              | No        |
+
+#### Reference
 
 ```typescript
-interface PaymentParams {
+export interface PaymentParams {
+  /**
+   * Address to send the funds to
+   */
   selectedAddress?: string;
+  /**
+   * Default fiat currency for the user to make the payment in
+   */
   selectedCurrency?: string;
-  fiatValue?: Number;
+  // /**
+  //  * Amount to buy in the selectedCurrency
+  //  */
+  // fiatValue?: number;
+  /**
+   * Cryptocurrency to buy
+   */
   selectedCryptoCurrency?: string;
-  crytoAmount?: Number;
+  /**
+   * Amount Cryptocurrency to buy
+   */
+  cryptoAmount?: number;
 }
 ```
 
-**Examples**
+### Example
 
 ```javascript
 // Default using wallet selected address
-const paymentStatus = await torus.initiateTopup("rampnetwork");
-```
-
-```javascript
-const paymentStatus = await torus.initiateTopup("rampnetwork", {
+const result = await torus?.initiateTopup("simplex" as any, {
   selectedCurrency: "USD",
-  selectedCryptoCurrency: "SOLANA_SOL",
-  selectedAddress: "< Recipient's Solana Public Key(base58) >",
+  cryptoAmount: 100,
+  selectedCryptoCurrency: "XRP",
 });
 ```
 
-```javascript
-const paymentStatus = await torus.initiateTopup("rampnetwork", {
-  selectedCurrency: "USD",
-});
-```
-
-*Note - for Ramp Network selectedCurrency and fiatValue have to be used together.
-For more details please check Ramp Network documentation(https://docs.ramp.network/configuration#fiatcurrency-and-fiatvalue)
+The above example will initiate a top-up transaction with the `simplex` provider and autofill the form with the wallet-selected address.

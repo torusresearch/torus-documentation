@@ -4,7 +4,7 @@ module.exports = {
     "README",
     {
       type: "category",
-      label: "Wallet",
+      label: "EVM Wallet",
       items: [
         "wallet/get-started",
         "wallet/what-is-wallet",
@@ -48,7 +48,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "xrpl Wallet",
+      label: "Solana Wallet",
       items: [
         "solana-wallet/get-started",
         "solana-wallet/what-is-wallet",
@@ -99,28 +99,16 @@ module.exports = {
         "xrpl-wallet/initialization",
         {
           "API Reference": [
-            "xrpl-wallet/api-reference/account",
+            "xrpl-wallet/api-reference/usage",
             "xrpl-wallet/api-reference/display",
             "xrpl-wallet/api-reference/topup",
             {
-              "XRPL API": [
-                "xrpl-wallet/api-reference/xrpl/send-transaction",
-                "xrpl-wallet/api-reference/xrpl/sign-transaction",
+              "XRPL Blockchain API": [
                 "xrpl-wallet/api-reference/xrpl/sign-message",
+                "xrpl-wallet/api-reference/xrpl/sign-transaction",
+                "xrpl-wallet/api-reference/xrpl/submit-transaction",
               ],
             },
-            "xrpl-wallet/api-reference/xrpl-adapter"
-          ],
-        },
-        {
-          Features: [
-            "xrpl-wallet/features/accountrecovery",
-            "xrpl-wallet/features/purchasecryptocurrency",
-            "xrpl-wallet/features/exportprivatekey",
-            // "xrpl-wallet/features/language",
-            "xrpl-wallet/features/themes",
-            "xrpl-wallet/features/pwa",
-            // "xrpl-wallet/features/whitelabeling",
           ],
         },
       ],

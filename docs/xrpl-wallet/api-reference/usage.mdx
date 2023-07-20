@@ -1,0 +1,93 @@
+---
+title: Using XRPL embed SDK
+sidebar_label: Usage
+---
+
+## `login`
+
+Prompts the user to login if they are not logged in. If an OAuth verifier is not provided, a modal selector will be shown.
+
+```javascript
+await torus.login(params);
+```
+
+**Parameters**
+
+| Name             | Type                  | Description                                                                 | Mandatory |
+| ---------------- | --------------------- | --------------------------------------------------------------------------- | --------- |
+| `loginProvider?` | `LOGIN_PROVIDER_TYPE` | The login provider to use. If not provided, a modal selector will be shown. | No        |
+| `login_hint?`    | `string`              | The login hint to be passed for email_passwordless login.                   | No        |
+
+**Returns**
+
+- `Promise<string[]>` : Returns a promise which resolves to the XRPL addresses associated with the user.
+
+```javascript title="Example"
+await torus.login();
+```
+
+## `logout`
+
+In order to log out of the Torus XRPL Wallet, you must first have an active login session.
+
+```javascript
+await torus.logout();
+```
+
+**Returns**
+
+- `Promise<void>` : This function returns a promise that resolves to void. It will reject if the user is not logged in.
+
+```javascript title="Example"
+await torus.logout();
+```
+
+## `getUserInfo`
+
+Returns the logged-in user's info including name, email, and imageUrl. Only
+works if the user is logged in.
+
+```javascript
+const userInfo = await torus.getUserInfo();
+```
+
+**Returns**
+
+- `Promise<UserInfo>` : Returns a promise which resolves to `UserInfo` object.
+
+**Reference**
+
+```typescript
+export interface UserInfo {
+  /**
+   * Email of the logged in user
+   */
+  email: string;
+  /**
+   * Full name of the logged in user
+   */
+  name: string;
+  /**
+   * Profile image of the logged in user
+   */
+  profileImage: string;
+  /**
+   * verifier of the logged in user (google, facebook etc)
+   */
+  verifier: string;
+  /**
+   * Verifier Id of the logged in user
+   *
+   * email for google,
+   * id for facebook,
+   * username for reddit,
+   * id for twitch,
+   * id for discord
+   */
+  verifierId: string;
+}
+```
+
+```javascript title="Example"
+const userInfo = await torus.getUserInfo();
+```

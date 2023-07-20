@@ -1,32 +1,32 @@
 ---
-title: Sign Transaction
+title: Submit Transaction
 ---
 
-To sign a transaction, you can use the `signTransaction` method.
+To submit a transaction, you can use the `submitTransaction` method.
 
 ---
 
-`signTransaction`
+`submitTransaction`
 
 ### Parameters
 
 `params`
 
-| Name          | Type                      | Description         |
-| ------------- | ------------------------- | ------------------- |
-| `transaction` | `TransactionJSONType`     | Transaction to sign |
-| `txOptions`   | `Record<string, unknown>` | Transaction options |
+| Name          | Type                      | Description           |
+| ------------- | ------------------------- | --------------------- |
+| `transaction` | `TransactionJSONType`     | Transaction to submit |
+| `txOptions`   | `Record<string, unknown>` | Transaction options   |
 
 ### Reference
 
 ```typescript
-async signTransaction(params: { transaction: TransactionJSONType; txOptions?: Record<string, unknown> }): Promise<{ signedTxBlob: string }> {
+async submitTransaction(params: { transaction: TransactionJSONType; txOptions?: Record<string, unknown> }): Promise<{ txHash: string }> {
     if (!this.isInitialized) throw new Error("Torus is not initialized");
-    const signMessageRes = await this.provider.request<TransactionJSONType, { signedTxBlob: string }>({
-      method: "xrpl_signTransaction",
+    const signMessageRes = await this.provider.request<TransactionJSONType, { txHash: string }>({
+      method: "xrpl_submitTransaction",
       params: { ...params },
     });
-    return signMessageRes as { signedTxBlob: string };
+    return signMessageRes as { txHash: string };
   }
 ```
 
@@ -55,12 +55,12 @@ export interface TransactionJSONType {
 ### Example
 
 ```typescript
-const res = await torus?.signTransaction({
+const res = await torus?.submitTransaction({
   transaction: {
     Account: account.value,
     Destination: "rJ48TAgt7yQN9FsQAGMNk2DhuTjmCVmNUz",
     TransactionType: "Payment",
-    Amount: "10000", // 0.01 XRP
+    Amount: "10000",
     Memo: "test",
   },
 });

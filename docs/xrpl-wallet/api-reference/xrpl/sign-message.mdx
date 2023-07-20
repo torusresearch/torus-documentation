@@ -2,26 +2,46 @@
 title: Sign Message
 ---
 
-In order to send a message for the user to sign, the web application must provide a UTF-8 encoded string as a Uint8Array.
-<br/>
-Refer to tweetnacl-js for verifying the signature of a message.
+To sign a message, you can use the `signMessage` method.
 
 ---
 
-## `signMessage`
+`signMessage`
 
-Method for signing message.
+### Parameters
 
-**Example**
+`params`
+
+| Name     | Type                | Description             |
+| -------- | ------------------- | ----------------------- |
+| `params` | `SignMessageParams` | Sign Message Parameters |
+
+`SignMessageParams`
+
+| Name      | Type     | Description                  |
+| --------- | -------- | ---------------------------- |
+| `message` | `string` | Message to sign              |
+| `from`    | `string` | Address to sign message with |
+
+### Reference
 
 ```typescript
-    const msg = Buffer.from("Test Signing Message ", "utf8");
-    const signed_message = await torus.signMessage(msg);
+async signMessage(params: SignMessageParams): Promise<{ signature: string }> {
+    if (!this.isInitialized) throw new Error("Torus is not initialized");
+    const signMessageRes = await this.provider.request<SignMessageParams, { signature: string }>({
+        method: "xrpl_signMessage",
+        params: { ...params },
+    });
+    return signMessageRes as { signature: string };
+}
 ```
 
-
-**Reference**
+### Example
 
 ```typescript
-    signMessage(data: Uint8Array): Promise<Uint8Array>;
+const message = "test message";
+const res = await torus?.signMessage({
+  message,
+  from: "xrpl address",
+});
 ```
