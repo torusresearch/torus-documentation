@@ -36,3 +36,58 @@ const res = await torus?.submitTransaction({
   },
 });
 ```
+
+## Add Token
+
+---
+
+```typescript
+const addToken = async () => {
+  try {
+    const tx = {
+      TransactionType: "TrustSet",
+      Account: account.value,
+      Fee: "12",
+      LimitAmount: {
+        currency: "USD",
+        issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B", // Bitstamp
+        value: "1000000000", // 1B USD-Bitstamp,
+      },
+      Flags: 131072, // TrustSetFlags.tfSetNoRipple
+    };
+
+    const res = await torus?.submitTransaction({
+      transaction: tx,
+    });
+    consolw.log("send res", res);
+  } catch (error) {
+    consolw.log(error);
+  }
+};
+```
+
+## Transfer Token
+
+```typescript
+const transferToken = async () => {
+  try {
+    const tx: any = {
+      Account: account.value,
+      Destination: "rpgvWwDQi5wQpPoqG9AWS1oWt6npmJWqjF",
+      TransactionType: "Payment",
+      Amount: {
+        currency: "USD",
+        issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B", // Bitstamp
+        value: "0.01", // 0.01 USD-Bitstamp
+      },
+      Fee: "12",
+    };
+    const res = await torus?.submitTransaction({
+      transaction: tx,
+    });
+    console.log("send res", res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+```
