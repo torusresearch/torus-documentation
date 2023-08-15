@@ -59,9 +59,9 @@ const addToken = async () => {
     const res = await torus?.submitTransaction({
       transaction: tx,
     });
-    consolw.log("send res", res);
+    console.log("send res", res);
   } catch (error) {
-    consolw.log(error);
+    console.log(error);
   }
 };
 ```
