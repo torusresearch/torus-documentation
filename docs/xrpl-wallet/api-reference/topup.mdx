@@ -10,12 +10,6 @@ Top-up your cryptocurrency through our fiat-to-crypto partners with ease.
 
 Use the `initiateTopup` function to start a top-up transaction with the selected provider from the dapp. Check the list below for supported values of parameters and providers.
 
-:::info NOTE
-
-You don't need to be logged in with Torus to use the top-up API.
-
-:::
-
 ```javascript
 const paymentStatus = await torus.initiateTopup(provider, params);
 ```
@@ -45,7 +39,7 @@ The list of `PAYMENT_PROVIDER_TYPE`:
 | :--------------------- | :------- | :-------------------------------------------------------- | :-------- |
 | selectedAddress        | `string` | Address to send the funds to                              | No        |
 | selectedCurrency       | `string` | Default fiat currency for the user to make the payment in | No        |
-| selectedCryptoCurrency | `string` | Cryptocurrency to buy                                     | No        |
+| selectedCryptoCurrency | `string` | 'XRP' to buy                                              | No        |
 | cryptoAmount           | `number` | Amount Cryptocurrency to buy                              | No        |
 
 #### Reference
@@ -86,4 +80,4 @@ const result = await torus?.initiateTopup("topper" as any, {
 });
 ```
 
-The above example will initiate a top-up transaction with the `simplex` provider and autofill the form with the wallet-selected address.
+The above example will initiate a top-up transaction with the `topper` provider and autofill the form with the wallet-selected address.

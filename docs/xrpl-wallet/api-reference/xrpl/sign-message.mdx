@@ -23,18 +23,11 @@ To sign a message, you can use the `signMessage` method.
 | `message` | `string` | Message to sign              |
 | `from`    | `string` | Address to sign message with |
 
-### Reference
+### Returns
 
-```typescript
-async signMessage(params: SignMessageParams): Promise<{ signature: string }> {
-    if (!this.isInitialized) throw new Error("Torus is not initialized");
-    const signMessageRes = await this.provider.request<SignMessageParams, { signature: string }>({
-        method: "xrpl_signMessage",
-        params: { ...params },
-    });
-    return signMessageRes as { signature: string };
-}
-```
+- `Promise<{ signature: string }>` - Returns a promise that resolves to signature of the message
+
+The signMessage function returns the signature property from the response object wrapped in a Promise. This means that when you call this function, you'll receive a Promise that, when resolved, will provide the message signature as a string.
 
 ### Example
 

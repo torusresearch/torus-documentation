@@ -104,15 +104,14 @@ with `TorusParams` as input.
 
 <TabItem value="table">
 
-| Parameter         | Type                   | Options                                                | Description                                                                                           |
-| ----------------- | ---------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| `buttonPosition`  | `BUTTON_POSITION_TYPE` | `bottom-left`, `top-left`, `bottom-right`, `top-right` | Determines where the torus widget is visible on the page.                                             |
-| `apiKey`          | `string`               |                                                        | Api key. Get yours today at https://developer.tor.us                                                  |
-| `network`         | `NetworkInterface`     |                                                        | Torus Network Object                                                                                  |
-| `buildEnv`        | `TORUS_BUILD_ENV_TYPE` | `production`, `development`, `testing`                 | Build Environment of Torus.                                                                           |
-| `enableLogging`   | `boolean`              |                                                        | Enables or disables logging.                                                                          |
-| `showTorusButton` | `boolean`              |                                                        | whether to show/hide torus widget.                                                                    |
-| `useLocalStorage` | `boolean`              |                                                        | Prefers to use localStorage instead of sessionStorage for torus iframe. Allows longer lived sessions. |
+| Parameter         | Type                   | Options                                                | Description                                                                                           | Mandatory |
+| ----------------- | ---------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------- |
+| `buttonPosition`  | `BUTTON_POSITION_TYPE` | `bottom-left`, `top-left`, `bottom-right`, `top-right` | Determines where the torus widget is visible on the page.                                             | No        |
+| `network`         | `NetworkInterface`     |                                                        | XRPL Network Object                                                                                   | No        |
+| `buildEnv`        | `TORUS_BUILD_ENV_TYPE` | `production`, `development`, `testing`                 | Build Environment of Torus.                                                                           | No        |
+| `enableLogging`   | `boolean`              |                                                        | Enables or disables logging.                                                                          | No        |
+| `showTorusButton` | `boolean`              |                                                        | whether to show/hide torus widget.                                                                    | No        |
+| `useLocalStorage` | `boolean`              |                                                        | Prefers to use localStorage instead of sessionStorage for torus iframe. Allows longer lived sessions. | No        |
 
 </TabItem>
 
@@ -125,11 +124,6 @@ export interface TorusParams {
    * @defaultValue bottom-left
    */
   buttonPosition?: BUTTON_POSITION_TYPE;
-  /**
-   * Api key
-   * Get yours today at {@link https://developer.tor.us | Dashboard}
-   */
-  apiKey?: string;
 
   /**
    * Torus Network Object
@@ -213,6 +207,7 @@ export interface NetworkInterface {
 
   /**
    * xrpl Network Key
+   * "mainnet", "testnet", "devnet"
    */
   networkKey: string;
 }
@@ -240,16 +235,16 @@ export const TORUS_BUILD_ENV = {
 
 <TabItem value="table">
 
-| Parameter          | Type     | Description                                                                                                                                     |
-| ------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `blockExplorerUrl` | `string` | Block explorer url for the chain                                                                                                                |
-| `logo`             | `string` | Logo url for the base token                                                                                                                     |
-| `tickerName`       | `string` | Name for ticker                                                                                                                                 |
-| `ticker`           | `string` | Symbol for ticker                                                                                                                               |
-| `rpcTarget`        | `string` | RPC target Url for the chain                                                                                                                    |
-| `chainId`          | `string` | Chain Id parameter(hex with 0x prefix) for the network. Mandatory for all networks. (assign one with a map to network identifier for platforms) |
-| `displayName`      | `string` | Display name for the network                                                                                                                    |
-| `networkKey`       | `string` | xrpl Network Key                                                                                                                                |
+| Parameter          | Type     | Description                                                                    | Mandatory |
+| ------------------ | -------- | ------------------------------------------------------------------------------ | --------- |
+| `blockExplorerUrl` | `string` | Block explorer url for the chain                                               | Yes       |
+| `logo`             | `string` | Logo url for the base token                                                    | Yes       |
+| `tickerName`       | `string` | Name for ticker                                                                | Yes       |
+| `ticker`           | `string` | Symbol for ticker                                                              | Yes       |
+| `rpcTarget`        | `string` | RPC target Url for the chain                                                   | Yes       |
+| `chainId`          | `string` | Use `0x1` as chainId for xrpl mainnet, `0x2` for testnet and `0x3` for devnet. | Yes       |
+| `displayName`      | `string` | Display name for the network                                                   | Yes       |
+| `networkKey`       | `string` | xrpl Network Key                                                               | Yes       |
 
 </TabItem>
 
@@ -323,6 +318,5 @@ await torus.init({
   showTorusButton: false, // default: true
   useLocalStorage: true, // default: false to use sessionStorage
   buttonPosition: "top-left", // default: bottom-left
-  apiKey: "api-key from web3auth dashboard", // https://developer.web3auth.io
 });
 ```

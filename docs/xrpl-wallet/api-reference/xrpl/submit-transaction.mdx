@@ -2,7 +2,7 @@
 title: Submit Transaction
 ---
 
-To submit a transaction, you can use the `submitTransaction` method.
+To sign and broadcast a transaction to xrpl ledger, you can use the `submitTransaction` method.
 
 ---
 
@@ -12,45 +12,16 @@ To submit a transaction, you can use the `submitTransaction` method.
 
 `params`
 
-| Name          | Type                      | Description           |
-| ------------- | ------------------------- | --------------------- |
-| `transaction` | `TransactionJSONType`     | Transaction to submit |
-| `txOptions`   | `Record<string, unknown>` | Transaction options   |
+| Name          | Type                      | Description                                                                                                                                                                                                                                                                                                           |
+| ------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `transaction` | `TransactionJSONType`     | This property holds the details of the transaction that needs to be signed. The type TransactionJSONType likely represents the structure of a transaction in JSON format.                                                                                                                                             |
+| `txOptions`   | `Record<string, unknown>` | This property allows for additional options or customization related to the transaction signing process. It is expected to be a generic object (`Record<string, unknown>`), which means it can hold various parameters or configurations. The specific options it might contain depend on the implementation context. |
 
-### Reference
+### Returns
 
-```typescript
-async submitTransaction(params: { transaction: TransactionJSONType; txOptions?: Record<string, unknown> }): Promise<{ txHash: string }> {
-    if (!this.isInitialized) throw new Error("Torus is not initialized");
-    const signMessageRes = await this.provider.request<TransactionJSONType, { txHash: string }>({
-      method: "xrpl_submitTransaction",
-      params: { ...params },
-    });
-    return signMessageRes as { txHash: string };
-  }
-```
+- `Promise<{ txHash: string }>` - Returns a promise that resolves to the transaction hash of the submitted transaction.
 
-`TransactionJSONType`
-
-```typescript
-export interface TransactionJSONType {
-  [Field: string]: string | number | Array<unknown> | undefined | object | boolean;
-  Sequence?: number;
-  Account?: string;
-  Destination?: string;
-  TransactionType?: string;
-  Memos?: {
-    Memo: {
-      MemoType?: string;
-      MemoData?: string;
-      MemoFormat?: string;
-    };
-  }[];
-  Flags?: number;
-  Fulfillment?: string;
-  LastLedgerSequence?: number;
-}
-```
+The submitTransaction function returns the txHash property from the response object wrapped in a Promise. This means that when you call this function, you'll receive a Promise that, when resolved, will provide the transaction hash as a string.
 
 ### Example
 
