@@ -1,0 +1,83 @@
+---
+title: Topup
+---
+
+Top-up your cryptocurrency through our fiat-to-crypto partners with ease.
+
+---
+
+## `initiateTopup`
+
+Use the `initiateTopup` function to start a top-up transaction with the selected provider from the dapp. Check the list below for supported values of parameters and providers.
+
+```javascript
+const paymentStatus = await torus.initiateTopup(provider, params);
+```
+
+**Parameters**
+
+| Name     | Type                    | Description                                                               | Mandatory |
+| :------- | :---------------------- | :------------------------------------------------------------------------ | :-------- |
+| provider | `PAYMENT_PROVIDER_TYPE` | The specified payment provider partner.                                   | Yes       |
+| params   | `PaymentParams`         | The topup tx params. used to autofill the form for that specific provider | Yes       |
+
+**Returns**
+
+- `Promise<boolean>` : Returns a promise which resolves to a `boolean` indicating whether the user has successfully completed the top-up flow.
+
+### `PAYMENT_PROVIDER_TYPE`
+
+The list of `PAYMENT_PROVIDER_TYPE`:
+
+- `topper`
+
+### `PaymentParams`
+
+**Parameters**
+
+| Name                   | Type     | Description                                               | Mandatory |
+| :--------------------- | :------- | :-------------------------------------------------------- | :-------- |
+| selectedAddress        | `string` | Address to send the funds to                              | No        |
+| selectedCurrency       | `string` | Default fiat currency for the user to make the payment in | No        |
+| selectedCryptoCurrency | `string` | 'XRP' to buy                                              | No        |
+| cryptoAmount           | `number` | Amount Cryptocurrency to buy                              | No        |
+
+#### Reference
+
+```typescript
+export interface PaymentParams {
+  /**
+   * Address to send the funds to
+   */
+  selectedAddress?: string;
+  /**
+   * Default fiat currency for the user to make the payment in
+   */
+  selectedCurrency?: string;
+  // /**
+  //  * Amount to buy in the selectedCurrency
+  //  */
+  // fiatValue?: number;
+  /**
+   * Cryptocurrency to buy
+   */
+  selectedCryptoCurrency?: string;
+  /**
+   * Amount Cryptocurrency to buy
+   */
+  cryptoAmount?: number;
+}
+```
+
+### Example
+
+```javascript
+// Default using wallet selected address
+const result = await torus?.initiateTopup("topper" as any, {
+  selectedCurrency: "USD",
+  cryptoAmount: 100,
+  selectedCryptoCurrency: "XRP",
+});
+```
+
+The above example will initiate a top-up transaction with the `topper` provider and autofill the form with the wallet-selected address.

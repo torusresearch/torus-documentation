@@ -1,0 +1,38 @@
+---
+title: Sign Transaction
+---
+
+To sign a transaction, you can use the `signTransaction` method.
+
+---
+
+`signTransaction`
+
+### Parameters
+
+`params`
+
+| Name          | Type                      | Description                                                                                                                                                                                                                                                                                                           |
+| ------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `transaction` | `TransactionJSONType`     | This property holds the details of the transaction that needs to be signed. The type TransactionJSONType likely represents the structure of a transaction in JSON format.                                                                                                                                             |
+| `txOptions`   | `Record<string, unknown>` | This property allows for additional options or customization related to the transaction signing process. It is expected to be a generic object (`Record<string, unknown>`), which means it can hold various parameters or configurations. The specific options it might contain depend on the implementation context. |
+
+### Returns
+
+- `Promise<{ signedTxBlob: string }>` - Returns a promise that resolves to signed transaction blob
+
+The signTransaction function returns the signedTxBlob property from the response object wrapped in a Promise. This means that when you call this function, you'll receive a Promise that, when resolved, will provide the signed transaction blob as a string.
+
+### Example
+
+```typescript
+const res = await torus?.signTransaction({
+  transaction: {
+    Account: account.value,
+    Destination: "rJ48TAgt7yQN9FsQAGMNk2DhuTjmCVmNUz",
+    TransactionType: "Payment",
+    Amount: "10000", // 0.01 XRP
+    Memo: "test",
+  },
+});
+```

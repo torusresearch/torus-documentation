@@ -1,0 +1,40 @@
+---
+title: Sign Message
+---
+
+To sign a message, you can use the `signMessage` method.
+
+---
+
+`signMessage`
+
+### Parameters
+
+`params`
+
+| Name     | Type                | Description             |
+| -------- | ------------------- | ----------------------- |
+| `params` | `SignMessageParams` | Sign Message Parameters |
+
+`SignMessageParams`
+
+| Name      | Type     | Description                  |
+| --------- | -------- | ---------------------------- |
+| `message` | `string` | Message to sign              |
+| `from`    | `string` | Address to sign message with |
+
+### Returns
+
+- `Promise<{ signature: string }>` - Returns a promise that resolves to signature of the message
+
+The signMessage function returns the signature property from the response object wrapped in a Promise. This means that when you call this function, you'll receive a Promise that, when resolved, will provide the message signature as a string.
+
+### Example
+
+```typescript
+const message = "test message";
+const res = await torus?.signMessage({
+  message,
+  from: "xrpl address",
+});
+```

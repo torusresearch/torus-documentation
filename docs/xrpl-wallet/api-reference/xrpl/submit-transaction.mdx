@@ -1,0 +1,91 @@
+---
+title: Submit Transaction
+---
+
+To sign and broadcast a transaction to xrpl ledger, you can use the `submitTransaction` method.
+
+---
+
+`submitTransaction`
+
+### Parameters
+
+`params`
+
+| Name          | Type                      | Description                                                                                                                                                                                                                                                                                                           |
+| ------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `transaction` | `TransactionJSONType`     | This property holds the details of the transaction that needs to be signed. The type TransactionJSONType likely represents the structure of a transaction in JSON format.                                                                                                                                             |
+| `txOptions`   | `Record<string, unknown>` | This property allows for additional options or customization related to the transaction signing process. It is expected to be a generic object (`Record<string, unknown>`), which means it can hold various parameters or configurations. The specific options it might contain depend on the implementation context. |
+
+### Returns
+
+- `Promise<{ txHash: string }>` - Returns a promise that resolves to the transaction hash of the submitted transaction.
+
+The submitTransaction function returns the txHash property from the response object wrapped in a Promise. This means that when you call this function, you'll receive a Promise that, when resolved, will provide the transaction hash as a string.
+
+### Example
+
+```typescript
+const res = await torus?.submitTransaction({
+  transaction: {
+    Account: account.value,
+    Destination: "rJ48TAgt7yQN9FsQAGMNk2DhuTjmCVmNUz",
+    TransactionType: "Payment",
+    Amount: "10000",
+    Memo: "test",
+  },
+});
+```
+
+## Add Token
+
+```typescript
+const addToken = async () => {
+  try {
+    const tx = {
+      TransactionType: "TrustSet",
+      Account: account.value,
+      Fee: "12",
+      LimitAmount: {
+        currency: "USD",
+        issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B", // Bitstamp
+        value: "1000000000", // 1B USD-Bitstamp,
+      },
+      Flags: 131072, // TrustSetFlags.tfSetNoRipple
+    };
+
+    const res = await torus?.submitTransaction({
+      transaction: tx,
+    });
+    console.log("send res", res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+```
+
+## Transfer Token
+
+```typescript
+const transferToken = async () => {
+  try {
+    const tx: any = {
+      Account: account.value,
+      Destination: "rpgvWwDQi5wQpPoqG9AWS1oWt6npmJWqjF",
+      TransactionType: "Payment",
+      Amount: {
+        currency: "USD",
+        issuer: "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B", // Bitstamp
+        value: "0.01", // 0.01 USD-Bitstamp
+      },
+      Fee: "12",
+    };
+    const res = await torus?.submitTransaction({
+      transaction: tx,
+    });
+    console.log("send res", res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+```

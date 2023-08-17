@@ -4,7 +4,7 @@ module.exports = {
     "README",
     {
       type: "category",
-      label: "Wallet",
+      label: "EVM Wallet",
       items: [
         "wallet/get-started",
         "wallet/what-is-wallet",
@@ -88,6 +88,29 @@ module.exports = {
         // },
         // "solana-wallet/integration-guidelines",
         // "solana-wallet/changelog",
+      ],
+    },
+    {
+      type: "category",
+      label: "XRPL Wallet",
+      link: { type: "doc", id: "xrpl-wallet/xrpl-wallet" },
+      items: [
+        "xrpl-wallet/installation",
+        "xrpl-wallet/initialization",
+        {
+          "API Reference": [
+            "xrpl-wallet/api-reference/usage",
+            "xrpl-wallet/api-reference/display",
+            "xrpl-wallet/api-reference/topup",
+            {
+              "XRPL Blockchain API": [
+                "xrpl-wallet/api-reference/xrpl/sign-message",
+                "xrpl-wallet/api-reference/xrpl/sign-transaction",
+                "xrpl-wallet/api-reference/xrpl/submit-transaction",
+              ],
+            },
+          ],
+        },
       ],
     },
     {
