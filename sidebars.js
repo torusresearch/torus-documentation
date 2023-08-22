@@ -111,6 +111,18 @@ module.exports = {
             },
           ],
         },
+        {
+          Features: [
+            "xrpl-wallet/features/accountrecovery",
+            "xrpl-wallet/features/purchasecryptocurrency",
+            "xrpl-wallet/features/exportprivatekey",
+            // "xrpl-wallet/features/language",
+            // "xrpl-wallet/features/nameresolver",
+            "xrpl-wallet/features/themes",
+            "xrpl-wallet/features/pwa",
+            // "xrpl-wallet/features/whitelabeling",
+          ],
+        },
       ],
     },
     {
