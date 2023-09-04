@@ -111,6 +111,16 @@ module.exports = {
             },
           ],
         },
+        {
+          Features: [
+            "xrpl-wallet/features/purchase-cryptocurrency",
+            "xrpl-wallet/features/export-private-key",
+            "xrpl-wallet/features/themes",
+            "xrpl-wallet/features/nfts",
+            "xrpl-wallet/features/contacts",
+            "xrpl-wallet/features/import-account",
+          ],
+        },
       ],
     },
     {
